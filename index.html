@@ -753,7 +753,7 @@ html{scroll-padding-top:calc(var(--hh) + var(--nav-h) + 16px)}
 .hx-row .go{grid-column:3;grid-row:1;font-size:20px;color:var(--lab-violet);transition:transform .2s}
 .hx-row:hover .t{text-decoration:underline;text-underline-offset:4px}
 .hx-row:hover .go{transform:translateX(4px)}
-.hx-moments{margin-top:28px}
+.hx-moments{margin-top:0}
 .hx-two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .hx-words{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:26px 32px}
 .hx-words li{padding-top:14px;border-top:1px solid #dcd8e6}
@@ -993,37 +993,6 @@ li.offer.flash{background:rgba(133,81,199,.08)}
 <section class="hx-sec hx-ready" id="home-ready" aria-labelledby="home-ready-h">
   <div class="wrap">
     <h2 id="home-ready-h" class="hx-h">Get ready for&#8230;</h2>
-    <div class="hx-start">
-      <p class="hx-eyebrow">Start here</p>
-      <div class="doors" role="group" aria-label="Where are you using this?">
-      <button type="button" class="door" data-set-scope="customer" data-go="#/toolkit?tab=customers" aria-pressed="false"><strong>Working with customers</strong><span>Toolkit: For customers &#183; Bring in the Lab: For a customer</span></button>
-      <button type="button" class="door" data-set-scope="internal" data-go="#/toolkit?tab=team" aria-pressed="false"><strong>Inside Microsoft</strong><span>Toolkit: For my team and For myself &#183; Bring in the Lab: Inside Microsoft</span></button>
-    </div>
-      <div class="chip-row role-chooser" role="group" aria-label="Start here: choose your role">
-      <span class="label">Start here</span>
-      <button type="button" class="chip" data-set-role="seller" aria-pressed="false">I'm a seller</button>
-      <button type="button" class="chip" data-set-role="manager" aria-pressed="false">I'm a people manager</button>
-      <button type="button" class="chip" data-set-role="hr" aria-pressed="false">I'm in HR / Talent</button>
-      <button type="button" class="chip" data-set-role="skilling" aria-pressed="false">I'm in skilling / L&amp;D</button>
-      <button type="button" class="chip" data-set-role="self" aria-pressed="false">I want this for myself</button>
-      <button type="button" class="chip" data-set-role="all" aria-pressed="true">Show everything</button>
-    </div>
-    </div>
-    
-<div class="hx-foryou" id="home-foryou" data-home-foryou hidden aria-labelledby="home-foryou-h">
-  <div>
-    <div class="card pad for-you" style="gap:14px;max-width:980px;margin:0 auto">
-      <div class="k"><span class="eyebrow">For you</span><h2 id="home-foryou-h" style="font-size:24px" data-foryou-label>Showing everything</h2><button type="button" class="linkish" data-clear>Show everything</button></div>
-      <div data-for-you="seller" hidden style="display:grid;gap:8px"><span class="eyebrow">The 60-second version</span><p class="callout">In one minute: AI can open economic opportunity, but the outcome depends on whether organizations redesign roles and talent systems for human skills, not just technical credentials.</p><span class="badge proposed">Proposed by builder, not reviewed</span></div><div data-for-you="manager" hidden style="display:grid;gap:8px"><span class="eyebrow">The 60-second version</span><p class="callout"><span class="tbd">[TBD: Lab to confirm]</span></p><span class="badge proposed">Proposed by builder, not reviewed</span></div><div data-for-you="hr" hidden style="display:grid;gap:8px"><span class="eyebrow">The 60-second version</span><p class="callout"><span class="tbd">[TBD: Lab to confirm]</span></p><span class="badge proposed">Proposed by builder, not reviewed</span></div><div data-for-you="skilling" hidden style="display:grid;gap:8px"><span class="eyebrow">The 60-second version</span><p class="callout"><span class="tbd">[TBD: Lab to confirm]</span></p><span class="badge proposed">Proposed by builder, not reviewed</span></div><div data-for-you="self" hidden style="display:grid;gap:8px"><span class="eyebrow">The 60-second version</span><p class="callout">AI is changing entry points and progression pathways. Start by naming your strengths and finding where they create value.</p><span class="badge proposed">Proposed by builder, not reviewed</span></div>
-      <div class="links">
-        <a class="ilink" href="#/toolkit"><span class="sq"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 1.5 4.5 4.5L4 10.5"/></svg></span><span>Toolkit: <span data-count="toolkit">0</span> items for you</span></a>
-        <a class="ilink" href="#/media"><span class="sq"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 1.5 4.5 4.5L4 10.5"/></svg></span><span>Events &amp; Media: <span data-count="media">0</span> items for you</span></a>
-        <a class="ilink" href="#/narrative" data-role-only hidden><span class="sq"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 1.5 4.5 4.5L4 10.5"/></svg></span><span>The Narrative: your "For you" summary</span></a>
-        <a class="ilink" href="#/engage"><span class="sq"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 1.5 4.5 4.5L4 10.5"/></svg></span><span>Bring in the Lab</span></a>
-      </div>
-    </div>
-  </div>
-</div>
     <ul class="hx-rows hx-moments"><li><a class="hx-row" href="#/toolkit?tab=customers&moment=customer-exec"><span class="t">Customer exec meeting</span><span class="m">5 items</span><span class="b">Anchor strategy discussions in workforce redesign, not just AI tooling.</span><span class="go" aria-hidden="true">&#8594;</span></a></li><li><a class="hx-row" href="#/toolkit?tab=customers&moment=ebc"><span class="t">EBC</span><span class="m">2 items</span><span class="b">Use the metaphor to frame organizational change in the opening narrative.</span><span class="go" aria-hidden="true">&#8594;</span></a></li><li><a class="hx-row" href="#/toolkit?tab=customers&moment=workshop"><span class="t">Workshop</span><span class="m">5 items</span><span class="b">Use discovery questions to identify talent-system gates that can be opened.</span><span class="go" aria-hidden="true">&#8594;</span></a></li><li><a class="hx-row" href="#/toolkit?tab=team&moment=team-meeting"><span class="t">Team meeting</span><span class="m">4 items</span><span class="b">Create common language across teams for AI + human capability design.</span><span class="go" aria-hidden="true">&#8594;</span></a></li><li><a class="hx-row" href="#/toolkit?tab=self&moment=one-on-one"><span class="t">1:1</span><span class="m">3 items</span><span class="b">Use strengths-first framing to support growth and mobility planning.</span><span class="go" aria-hidden="true">&#8594;</span></a></li><li><a class="hx-row" href="#/toolkit?tab=team&moment=social-post"><span class="t">Social post</span><span class="m">1 item</span><span class="b">Share human-centered framing with clear internal-use guardrails.</span><span class="go" aria-hidden="true">&#8594;</span></a></li>
     </ul>
   </div>
