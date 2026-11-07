@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Frontier Mindset Lab</title>
+<meta name="description" content="Work is changing, not ending. The Frontier Mindset Lab helps organizations redesign work around what AI can do and what people can do.">
+<style>
+/* ---------- Tokens (from the current Narrative Hub) ---------- */
+:root{
+  --font:"Segoe UI","Segoe UI Web (West European)",-apple-system,BlinkMacSystemFont,system-ui,Roboto,"Helvetica Neue",sans-serif;
+  --ink:#000; --ink-2:#323130; --ink-3:#605e5c;
+  --line:#e1dfdd; --bg:#fff; --bg-soft:#f8f8f8;
+  --lab-indigo:#1A2397; --lab-violet:#8551C7; --lab-magenta:#D25BA4; --lab-coral:#FB96A4; --lab-peach:#FCDAB0;
+  --rainbow:linear-gradient(90deg,var(--lab-indigo),var(--lab-violet) 38%,var(--lab-magenta) 68%,var(--lab-coral) 88%,var(--lab-peach));
+  --text-grad:linear-gradient(90deg,var(--lab-indigo) 0%,var(--lab-violet) 55%,var(--lab-magenta) 100%);
+  --shadow:0 0 1.25px rgba(0,0,0,.12),0 1.25px 2.5px rgba(0,0,0,.14);
+  --shadow-lg:0 0 2px rgba(0,0,0,.12),0 8px 24px rgba(0,0,0,.10);
+  --r-card:20px; --r-btn:10px; --wrap:1170px; --gutter:24px; --nav-h:65px;
+}
+*{box-sizing:border-box}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);font-size:16px;line-height:1.5;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--lab-violet)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--lab-violet);outline-offset:3px;border-radius:6px}
+[hidden]{display:none!important}
+.skip{position:absolute;left:8px;top:-60px;background:#000;color:#fff;padding:10px 14px;border-radius:6px;z-index:100;text-decoration:none}
+.skip:focus{top:8px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- Header & nav ---------- */
+header.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-inner{display:flex;align-items:center;gap:24px;height:var(--nav-h)}
+.brand{text-decoration:none;color:#505050;font-weight:600;font-size:20px;letter-spacing:-.3px;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.brand .sq{width:22px;height:22px;border-radius:6px;background:conic-gradient(from 200deg,var(--lab-indigo),var(--lab-violet),var(--lab-magenta),var(--lab-coral),var(--lab-peach),var(--lab-indigo))}
+nav.global{margin-left:auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav.global::-webkit-scrollbar{display:none}
+nav.global a{flex:0 0 auto;text-decoration:none;color:#262626;font-size:14px;font-weight:600;padding:8px 10px;border-bottom:2px solid transparent;white-space:nowrap}
+nav.global a:hover{color:var(--lab-violet)}
+nav.global a[aria-current="page"]{color:var(--lab-indigo);border-bottom-color:var(--lab-violet)}
+
+/* ---------- Shared bits ---------- */
+h1{font-size:44px;line-height:1.1;letter-spacing:-.6px;color:var(--lab-indigo);margin:8px 0 12px;font-weight:600}
+h2{font-size:26px;letter-spacing:-.2px;color:var(--lab-indigo);margin:48px 0 16px;font-weight:600}
+h3{font-size:18px;margin:8px 0 6px;color:var(--ink);font-weight:600}
+p{margin:0 0 12px;color:var(--ink-2)}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--lab-violet);margin:24px 0 0}
+.lede{font-size:18px;color:var(--ink-2);max-width:680px}
+.grad{background:var(--text-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.view{padding:24px 0 80px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.card{background:linear-gradient(45deg,#fff,rgba(255,255,255,.6));border:2px solid #fff;border-radius:var(--r-card);box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--rainbow)}
+.card p{font-size:15px;color:var(--ink-2);margin:0 0 10px}
+.card .ilink{margin-top:auto;font-weight:600;font-size:15px;text-decoration:none;color:var(--lab-indigo)}
+.card .ilink:hover{color:var(--lab-violet)}
+.tag{align-self:flex-start;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;margin-bottom:10px;border:1px solid var(--line);color:var(--ink-3);background:#fff}
+.tag.live{background:var(--lab-indigo);color:#fff;border-color:var(--lab-indigo)}
+.tag.wip{background:var(--lab-peach);color:var(--ink);border-color:var(--lab-peach)}
+.tag.tbd{background:#fff;color:var(--ink-3);border-style:dashed}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px/1.2 var(--font);text-decoration:none;border-radius:var(--r-btn);padding:10px 15px;border:2px solid var(--lab-indigo);background:var(--lab-indigo);color:#fff;cursor:pointer}
+.btn:hover{background:var(--lab-violet);border-color:var(--lab-violet)}
+.btn.ghost{background:#fff;color:var(--lab-indigo)}
+.back{margin-top:48px}
+.back a{font-weight:600;text-decoration:none}
+.thesis{border-radius:var(--r-card);background:linear-gradient(135deg,var(--lab-peach),#fff 70%);padding:28px;margin-top:24px;box-shadow:var(--shadow)}
+.thesis p{font-size:20px;color:var(--ink);margin:0;max-width:760px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.chips button{font:600 14px var(--font);padding:8px 14px;border-radius:999px;border:1px solid #c8c6c4;background:#fff;color:var(--ink-2);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--lab-indigo);border-color:var(--lab-indigo);color:#fff}
+.empty{border:2px dashed #c8c6c4;border-radius:var(--r-card);padding:28px;color:var(--ink-3);text-align:center}
+
+/* ---------- Home: the ripple ---------- */
+.hero{text-align:center;padding:24px 0 8px}
+.hero h1{font-size:48px;margin-top:0}
+.hero .lede{margin:0 auto}
+.map-wrap{position:relative;width:min(620px,100%);aspect-ratio:1;margin:12px auto 0}
+.map-wrap canvas,.map-wrap svg{position:absolute;inset:0;width:100%;height:100%}
+.map-wrap canvas{pointer-events:none}
+.map-wrap svg{overflow:visible}
+.ring{cursor:pointer;outline:none}
+.ring circle{transition:fill .25s,stroke-width .25s}
+.ring text{pointer-events:none;font-family:var(--font);font-weight:600}
+.ring.r3 .band{fill:rgba(251,150,164,.22)}
+.ring.r2 .band{fill:rgba(133,81,199,.14)}
+.ring.r1 .band{fill:var(--lab-indigo)}
+.ring:hover .band,.ring:focus-visible .band{stroke:var(--lab-magenta);stroke-width:3}
+.ring.r3:hover .band{fill:rgba(251,150,164,.38)}
+.ring.r2:hover .band{fill:rgba(133,81,199,.26)}
+.ring.r1:hover .band{fill:var(--lab-violet)}
+.ring:focus-visible{outline:none}
+.ring-note{font-size:13px;color:var(--ink-3);margin-top:8px}
+.rings-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:40px}
+.rings-cards a.card{text-decoration:none;color:inherit}
+.rings-cards a.card:hover{box-shadow:var(--shadow-lg)}
+.rings-cards ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:15px}
+.num{font-size:44px;font-weight:600;line-height:1;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
+
+/* ---------- Work with the Lab ---------- */
+.intro-box{background:var(--bg-soft);border-radius:var(--r-card);padding:24px;margin-bottom:24px}
+
+footer{border-top:1px solid var(--line);padding:24px 0;color:var(--ink-3);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:720px){
+  :root{--gutter:16px}
+  h1{font-size:34px}
+  .hero h1{font-size:34px}
+  h2{font-size:22px}
+  .brand{font-size:17px}
+  .brand .sq{display:none}
+  .top-inner{gap:12px}
+  nav.global a{padding:8px 8px;font-size:13px}
+  .thesis p{font-size:17px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#home"><span class="sq" aria-hidden="true"></span>The Frontier Mindset Lab</a>
+    <nav class="global" aria-label="Main">
+      <a href="#narrative" data-r="narrative">1 · The Narrative</a>
+      <a href="#inside" data-r="inside">2 · Inside Microsoft</a>
+      <a href="#customers" data-r="customers">3 · With Customers</a>
+      <a href="#studio" data-r="studio">Studio</a>
+      <a href="#work" data-r="work">Work with the Lab</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HOME: the ripple map ============ -->
+<section id="home" class="view wrap" aria-labelledby="home-title">
+  <div class="hero">
+    <p class="kicker">Lab readout · Frontier Mindset</p>
+    <h1 id="home-title">Small experiments. <span class="grad">Outsized waves.</span></h1>
+    <p class="lede">Work is changing, not ending. Every idea we test sends a ripple outward: from what we believe, to our own teams, to the customers we work with.</p>
+  </div>
+
+  <div class="map-wrap" id="map">
+    <canvas id="ripples" aria-hidden="true"></canvas>
+    <svg viewBox="0 0 640 640" role="navigation" aria-label="Site rings">
+      <!-- Ring 3: outer -->
+      <a class="ring r3" href="#customers" aria-label="Ring 3: With Customers">
+        <circle class="band" cx="320" cy="320" r="310"/>
+        <text x="320" y="66" text-anchor="middle" font-size="16" fill="#1A2397">3 · With Customers</text>
+      </a>
+      <!-- Ring 2: middle -->
+      <a class="ring r2" href="#inside" aria-label="Ring 2: Inside Microsoft">
+        <circle class="band" cx="320" cy="320" r="210"/>
+        <text x="320" y="172" text-anchor="middle" font-size="16" fill="#1A2397">2 · Inside Microsoft</text>
+      </a>
+      <!-- Ring 1: core -->
+      <a class="ring r1" href="#narrative" aria-label="Ring 1: The Narrative">
+        <circle class="band" cx="320" cy="320" r="104"/>
+        <text x="320" y="312" text-anchor="middle" font-size="18" fill="#fff">1 · The Narrative</text>
+        <text x="320" y="336" text-anchor="middle" font-size="13" fill="#FCDAB0" font-weight="400">what we believe</text>
+      </a>
+    </svg>
+  </div>
+  <p class="ring-note" style="text-align:center">Click a ring to go in. Each ring holds the next layer of the journey.</p>
+
+  <div class="rings-cards">
+    <a class="card" href="#narrative">
+      <span class="tag live">Ring 1</span>
+      <h3>The Narrative</h3>
+      <p>What we believe.</p>
+      <ul><li>The thesis</li><li>Big ideas (one page each)</li><li>Voices</li></ul>
+      <span class="ilink" style="margin-top:14px">Explore →</span>
+    </a>
+    <a class="card" href="#inside">
+      <span class="tag live">Ring 2</span>
+      <h3>Inside Microsoft</h3>
+      <p>Our own teams.</p>
+      <ul><li>For leaders and managers</li><li>For HR and L&amp;D</li><li>For every employee</li></ul>
+      <span class="ilink" style="margin-top:14px">Explore →</span>
+    </a>
+    <a class="card" href="#customers">
+      <span class="tag live">Ring 3</span>
+      <h3>With Customers</h3>
+      <p>Taking the ideas to the people we serve.</p>
+      <ul><li>Direct: workshops, keynotes, briefings</li><li>Through sellers and partners</li></ul>
+      <span class="ilink" style="margin-top:14px">Explore →</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ RING 1 ============ -->
+<section id="narrative" class="view wrap" hidden aria-labelledby="narrative-title"></section>
+
+<!-- ============ RING 2 ============ -->
+<section id="inside" class="view wrap" hidden aria-labelledby="inside-title"></section>
+
+<!-- ============ RING 3 ============ -->
+<section id="customers" class="view wrap" hidden aria-labelledby="customers-title"></section>
+
+<!-- ============ STUDIO (utility) ============ -->
+<section id="studio" class="view wrap" hidden aria-labelledby="studio-title">
+  <p class="kicker">Utility · The shared media library</p>
+  <h1 id="studio-title" tabindex="-1">Studio</h1>
+  <p class="lede">Watch · Read · Listen · Learn · Present · Run · Share</p>
+  <div class="chips" id="studio-chips" role="group" aria-label="Filter by format"></div>
+  <div class="grid" id="studio-grid"></div>
+  <p class="back"><a href="#home">← Back to the rings</a></p>
+</section>
+
+<!-- ============ WORK WITH THE LAB (utility) ============ -->
+<section id="work" class="view wrap" hidden aria-labelledby="work-title">
+  <p class="kicker">Utility</p>
+  <h1 id="work-title" tabindex="-1">Work with the Lab</h1>
+  <p class="lede">Bring the Lab into your team, your event or your customer conversation.</p>
+  <div class="grid" id="work-grid" style="margin-top:24px"></div>
+  <p class="back"><a href="#home">← Back to the rings</a></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>The Frontier Mindset Lab · Internal</span>
+    <span><a href="#work">Request a talk, workshop or content</a></span>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   CONTENT. Edit this block to change the site.
+   Status values: "live", "wip" (in progress), "tbd".
+   Leave an href empty to show "Link TBD".
+   ========================================================= */
+const DATA = {
+  rings: {
+    narrative: {
+      title: "The Narrative",
+      kicker: "Ring 1 · What we believe",
+      intro: "The core idea, and the people who carry it.",
+      thesis: "Work is changing, not ending. As AI takes on more of the routine work, human capability becomes more important, not less, and leaders have more agency than they think.",
+      groups: [
+        { name: "Big ideas", items: [
+          { title: "The House and the Door", text: "One idea, one page. Everything made from it lives here.", status: "live", href: "#narrative", cta: "Read the idea" },
+          { title: "More ideas", text: "Each new big idea gets its own page in this ring.", status: "tbd" }
+        ]},
+        { name: "Voices", items: [
+          { title: "Aneesh", text: "A voice from the Lab on what this work means.", status: "live", href: "#narrative", cta: "Hear the voice" },
+          { title: "Second voice", text: "Waiting to be named.", status: "tbd" }
+        ]}
+      ]
+    },
+    inside: {
+      title: "Inside Microsoft",
+      kicker: "Ring 2 · Our own teams",
+      intro: "Start with ourselves. Each audience gets a path designed for its role.",
+      groups: [
+        { name: "Paths by role", items: [
+          { title: "For leaders and managers", text: "Redesign work around what AI and people each do best.", status: "live", href: "#inside", cta: "Open the path" },
+          { title: "For HR and L&D", text: "Build the human skills and mindsets, at scale.", status: "live", href: "#inside", cta: "Open the path" },
+          { title: "For every employee", text: "Practical ways to work with the change, starting today.", status: "live", href: "#inside", cta: "Open the path" }
+        ]}
+      ]
+    },
+    customers: {
+      title: "With Customers",
+      kicker: "Ring 3 · Customers",
+      intro: "Take the ideas outside the company, directly or through the sellers and partners who serve our customers.",
+      groups: [
+        { name: "Direct", items: [
+          { title: "Executive workshops", text: "CXO workshop for leaders making the big calls.", status: "live", href: "#customers", cta: "See the workshop" },
+          { title: "Events and keynotes", text: "Ignite and other stages.", status: "live", href: "#customers", cta: "See the talks" },
+          { title: "Briefings on request", text: "Tailored conversations for a specific customer.", status: "live", href: "#work", cta: "Request a briefing" }
+        ]},
+        { name: "Through sellers and partners", items: [
+          { title: "Seller kits (by idea)", text: "Ready-to-use material for each big idea.", status: "live", href: "#customers", cta: "Open the kits" },
+          { title: "Trainer-led workshop kits", text: "Everything a trainer needs to run the session.", status: "live", href: "#customers", cta: "Open the kits" },
+          { title: "Partner-ready versions", text: "Versions prepared for partners to use directly.", status: "tbd" }
+        ]}
+      ]
+    }
+  },
+  studio: {
+    formats: ["All", "Watch", "Read", "Listen", "Learn", "Present", "Run", "Share"],
+    items: [
+      { title: "Learning paths", text: "Courses and playlists, grouped by idea.", format: "Learn", status: "live", href: "#studio", cta: "Browse paths" }
+    ]
+  },
+  work: [
+    { title: "Request a talk, workshop or content", text: "Tell us the audience and the outcome you want.", status: "tbd" },
+    { title: "Submit an idea or recording", text: "Share something you tried. It may be the next ripple.", status: "tbd" },
+    { title: "About the team, and what's new", text: "Who we are, and what has changed recently.", status: "tbd" }
+  ]
+};
+
+/* ---------- Helpers ---------- */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const STATUS = { live: "Live", wip: "In progress", tbd: "TBD" };
+
+function card(it){
+  const link = it.href
+    ? `<a class="ilink" href="${esc(it.href)}">${esc(it.cta || "Open")} →</a>`
+    : `<span class="ilink" style="color:var(--ink-3)">Link TBD</span>`;
+  return `<article class="card">
+    <span class="tag ${it.status}">${STATUS[it.status]}</span>
+    <h3>${esc(it.title)}</h3>
+    <p>${esc(it.text)}</p>
+    ${link}
+  </article>`;
+}
+
+/* ---------- Render ring pages ---------- */
+function renderRing(id, r){
+  const el = document.getElementById(id);
+  const head = `<p class="kicker">${esc(r.kicker)}</p>
+    <h1 id="${id}-title" tabindex="-1">${esc(r.title)}</h1>
+    <p class="lede">${esc(r.intro)}</p>
+    ${r.thesis ? `<div class="thesis"><p>${esc(r.thesis)}</p></div>` : ""}`;
+  const groups = r.groups.map(g => `
+    <h2>${esc(g.name)}</h2>
+    <div class="grid">${g.items.map(card).join("")}</div>`).join("");
+  el.innerHTML = head + groups + `<p class="back"><a href="#home">← Back to the rings</a></p>`;
+}
+renderRing("narrative", DATA.rings.narrative);
+renderRing("inside", DATA.rings.inside);
+renderRing("customers", DATA.rings.customers);
+
+/* ---------- Studio: filterable library ---------- */
+let studioFilter = "All";
+function renderStudio(){
+  const chips = document.getElementById("studio-chips");
+  chips.innerHTML = DATA.studio.formats.map(f =>
+    `<button type="button" aria-pressed="${f === studioFilter}" data-f="${f}">${f}</button>`).join("");
+  const items = DATA.studio.items.filter(i => studioFilter === "All" || i.format === studioFilter);
+  document.getElementById("studio-grid").innerHTML = items.length
+    ? items.map(card).join("")
+    : `<div class="empty" style="grid-column:1/-1">Nothing in ${esc(studioFilter)} yet. <a href="#work">Submit a recording</a> to get it started.</div>`;
+}
+document.getElementById("studio-chips").addEventListener("click", e => {
+  const b = e.target.closest("button[data-f]");
+  if (!b) return;
+  studioFilter = b.dataset.f;
+  renderStudio();
+});
+renderStudio();
+
+/* ---------- Work with the Lab ---------- */
+document.getElementById("work-grid").innerHTML = DATA.work.map(card).join("");
+
+/* ---------- Router ---------- */
+const VIEWS = ["home", "narrative", "inside", "customers", "studio", "work"];
+function route(){
+  const id = location.hash.replace("#", "") || "home";
+  const target = VIEWS.includes(id) ? id : "home";
+  for (const v of VIEWS) document.getElementById(v).hidden = v !== target;
+  document.querySelectorAll("nav.global a").forEach(a => {
+    if (a.dataset.r === target) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
+  if (target === "home") sizeCanvas();
+  window.scrollTo({ top: 0, behavior: "auto" });
+  const h = document.querySelector(`#${target} h1`);
+  if (h && target !== "home") h.focus({ preventScroll: true });
+}
+window.addEventListener("hashchange", route);
+
+/* ---------- Ripple canvas (the "drop" on the surface) ---------- */
+const cv = document.getElementById("ripples");
+const ctx = cv.getContext("2d");
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let W = 0, H = 0, drops = [], lastTs = 0, nextDrop = 0;
+
+function sizeCanvas(){
+  const r = cv.parentElement.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = r.width; H = r.height;
+  cv.width = W * dpr; cv.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function drop(x, y){ drops.push({ x, y, t: 0 }); }
+
+const LIFE = 6000;
+function frame(ts){
+  requestAnimationFrame(frame);
+  if (reduceMotion || !W || document.getElementById("home").hidden) return;
+  const dt = Math.min(ts - lastTs, 50); lastTs = ts;
+  if (ts > nextDrop){ drop(W / 2, H / 2); nextDrop = ts + 3800; }
+  ctx.clearRect(0, 0, W, H);
+  const maxR = Math.hypot(W, H) / 2;
+  drops = drops.filter(d => d.t < LIFE);
+  for (const d of drops){
+    d.t += dt;
+    const p = d.t / LIFE;
+    const alpha = (1 - p) * 0.4;
+    for (let k = 0; k < 3; k++){
+      const rr = p * maxR * 0.9 - k * 16;
+      if (rr <= 0) continue;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, rr, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(133,81,199,${alpha * (1 - k * 0.3)})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+  }
+}
+window.addEventListener("resize", sizeCanvas);
+sizeCanvas();
+drop(W / 2, H / 2); // one drop on load
+requestAnimationFrame(frame);
+
+route();
+</script>
+</body>
+</html>
