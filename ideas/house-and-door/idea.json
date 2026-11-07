@@ -1,0 +1,265 @@
+{
+  "id": "house-and-door",
+  "title": "The House and the Door",
+  "format": "Animated metaphor",
+  "oneLiner": "AI opens the door to economic opportunity — and opportunity now starts with the human skills we all have.",
+  "roles": [
+    "sellers"
+  ],
+  "cardImage": "../ideas/house-and-door/card.svg",
+  "madeFrom": {
+    "summary": "An example of agentic content creation: a two-minute talk turned into a 55-second animated explainer.",
+    "steps": [
+      "Start with a recording: a 1:58 talk from AfroTech.",
+      "Transcribe it and generate a caption file.",
+      "Pull out the beats: six timestamped moments that carry the metaphor.",
+      "Storyboard one scene per beat, ending on the question for leaders.",
+      "Animate it: 55 seconds of on-screen text and illustration, with no voiceover.",
+      "Publish it as one lightweight web page that embeds in the hub."
+    ]
+  },
+  "status": "Draft",
+  "speaker": {
+    "name": "Aneesh Raman",
+    "role": "Chief Economic Opportunity Officer, Microsoft"
+  },
+  "sourceEvent": "AfroTech (1:55 recording)",
+  "metaphor": {
+    "summary": "Economic opportunity is a house. The labor market is the door, gated by degrees, job titles and pedigree. AI opens that door, and people can start from their strengths, not their deficits.",
+    "coreImage": "House and doorway as opportunity system"
+  },
+  "beats": [
+    {
+      "id": "beat-1",
+      "label": "The house",
+      "quote": "I've often thought about economic opportunity as a house.",
+      "start": "00:00:00",
+      "end": "00:00:23",
+      "status": "Draft"
+    },
+    {
+      "id": "beat-2",
+      "label": "The door",
+      "quote": "The labor market is one of the least transparent and least dynamic markets humans have ever created.",
+      "start": "00:00:23",
+      "end": "00:00:47",
+      "status": "Draft"
+    },
+    {
+      "id": "beat-3",
+      "label": "Three ways in",
+      "quote": "Some people were born in the house, some came through the front door with a degree, and others snuck through by starting a business.",
+      "start": "00:00:47",
+      "end": "00:01:05",
+      "status": "Draft"
+    },
+    {
+      "id": "beat-4",
+      "label": "AI opens the door",
+      "quote": "AI is going to open the door — the most democratizing technology we've ever had.",
+      "start": "00:01:05",
+      "end": "00:01:33",
+      "status": "Draft"
+    },
+    {
+      "id": "beat-5",
+      "label": "Strengths, not deficits",
+      "quote": "Everyone now doesn't start with deficits. They start with strengths.",
+      "start": "00:01:33",
+      "end": "00:01:50",
+      "status": "Draft"
+    },
+    {
+      "id": "beat-6",
+      "label": "Needs review line",
+      "quote": "This is the moment where the door doesn't need to be open for you to get in.",
+      "start": "00:01:50",
+      "end": "00:01:54",
+      "status": "needs-review"
+    }
+  ],
+  "leaderTranslation": {
+    "headline": "Where are the doors in your organization?",
+    "explanation": "Inside a company, the door is degree requirements, title-gated promotion and closed internal mobility. Leaders can open those doors by hiring, promoting and paying for human skills."
+  },
+  "explainer": {
+    "title": "The House and the Door in 55 seconds",
+    "description": "Animated version of the metaphor in six scenes, with on-screen text and no voiceover.",
+    "path": "../ideas/house-and-door/explainer/index.html",
+    "duration": "0:55",
+    "status": "Draft",
+    "shareability": "Internal only",
+    "scenes": [
+      {
+        "title": "The house",
+        "beatId": "beat-1"
+      },
+      {
+        "title": "The door",
+        "beatId": "beat-2"
+      },
+      {
+        "title": "Three ways in",
+        "beatId": "beat-3"
+      },
+      {
+        "title": "AI opens the door",
+        "beatId": "beat-4"
+      },
+      {
+        "title": "Strengths, not deficits",
+        "beatId": "beat-5"
+      },
+      {
+        "title": "Where are the doors?",
+        "source": "leaderTranslation"
+      }
+    ]
+  },
+  "roleGuidance": [
+    {
+      "role": "sellers",
+      "whenToUse": "Executive conversations about AI transformation, workforce redesign and talent mobility.",
+      "howToUse": "Use the metaphor to diagnose talent gates, then move to discovery questions and practical next steps."
+    },
+    {
+      "role": "managers",
+      "whenToUse": "[TBD — Cowork drafting]",
+      "howToUse": "[TBD — Cowork drafting]"
+    },
+    {
+      "role": "hr-talent",
+      "whenToUse": "[TBD — Cowork drafting]",
+      "howToUse": "[TBD — Cowork drafting]"
+    },
+    {
+      "role": "skilling-ld",
+      "whenToUse": "[TBD — Cowork drafting]",
+      "howToUse": "[TBD — Cowork drafting]"
+    },
+    {
+      "role": "marketing-comms",
+      "whenToUse": "[TBD — Cowork drafting]",
+      "howToUse": "[TBD — Cowork drafting]"
+    },
+    {
+      "role": "everyone",
+      "whenToUse": "[TBD — Cowork drafting]",
+      "howToUse": "[TBD — Cowork drafting]"
+    }
+  ],
+  "discoveryQuestions": [
+    "Which roles still require a degree that the work doesn't?",
+    "How do people move into higher-value roles today, and who gets left outside?",
+    "Which human skills do your best people show that your systems don't measure?",
+    "Where could AI remove a gate rather than add one?",
+    "What would a strengths-first talent process look like here?"
+  ],
+  "talkTrack": {
+    "opener": "[TBD — Cowork drafting]",
+    "bridge": "[TBD — Cowork drafting]",
+    "close": "[TBD — Cowork drafting]"
+  },
+  "objections": [
+    {
+      "objection": "[TBD — Cowork drafting]",
+      "response": "[TBD — Cowork drafting]"
+    }
+  ],
+  "doNotSay": [
+    "[TBD — Cowork drafting]"
+  ],
+  "copilotPrompts": [
+    "Using The House and the Door metaphor, draft three discovery questions for a CHRO at [customer] in [industry].",
+    "Turn this metaphor into a 60-second internal talk track for an account team preparing an executive workshop."
+  ],
+  "assets": [
+    {
+      "type": "clip",
+      "format": "9x16",
+      "path": "../ideas/house-and-door/clips/9x16/output_progressive_4b84e432-1b15-4ec6-ad88-bd8bf903e37f.mp4",
+      "captionPath": "../ideas/house-and-door/source/house-and-door.vtt",
+      "beatId": "beat-1",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "clip",
+      "format": "9x16",
+      "path": "../ideas/house-and-door/clips/9x16/output_progressive_4b84e432-1b15-4ec6-ad88-bd8bf903e37f.mp4",
+      "captionPath": "../ideas/house-and-door/source/house-and-door.vtt",
+      "beatId": "beat-2",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "clip",
+      "format": "9x16",
+      "path": "../ideas/house-and-door/clips/9x16/output_progressive_4b84e432-1b15-4ec6-ad88-bd8bf903e37f.mp4",
+      "captionPath": "../ideas/house-and-door/source/house-and-door.vtt",
+      "beatId": "beat-3",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "clip",
+      "format": "9x16",
+      "path": "../ideas/house-and-door/clips/9x16/output_progressive_4b84e432-1b15-4ec6-ad88-bd8bf903e37f.mp4",
+      "captionPath": "../ideas/house-and-door/source/house-and-door.vtt",
+      "beatId": "beat-4",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "clip",
+      "format": "9x16",
+      "path": "../ideas/house-and-door/clips/9x16/output_progressive_4b84e432-1b15-4ec6-ad88-bd8bf903e37f.mp4",
+      "captionPath": "../ideas/house-and-door/source/house-and-door.vtt",
+      "beatId": "beat-5",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "talk track",
+      "format": "txt",
+      "path": "../ideas/house-and-door/seller/talk-track.txt",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "workshop module",
+      "format": "txt",
+      "path": "../ideas/house-and-door/seller/discovery-questions.txt",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "quote card",
+      "format": "svg",
+      "path": "../ideas/house-and-door/clips/quote-cards/house-door-quote-card.svg",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "GIF",
+      "format": "txt",
+      "path": "../ideas/house-and-door/clips/gifs/README.txt",
+      "shareability": "Internal only",
+      "status": "Draft"
+    },
+    {
+      "type": "deck",
+      "format": "txt",
+      "path": "../ideas/house-and-door/seller/deck-link.txt",
+      "shareability": "Internal only",
+      "status": "Draft"
+    }
+  ],
+  "tags": [
+    "metaphor",
+    "economic-opportunity",
+    "human-skills"
+  ],
+  "owner": "The Frontier Mindset Lab",
+  "lastUpdated": "2026-11-06"
+}

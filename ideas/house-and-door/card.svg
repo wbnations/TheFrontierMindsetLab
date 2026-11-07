@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="t">
+  <title id="t">A lit house with its front door open and people walking toward it</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eaf2fb"/><stop offset=".6" stop-color="#f5eff8"/><stop offset="1" stop-color="#fbf5ee"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffe3b3" stop-opacity=".95"/><stop offset=".6" stop-color="#ffd6e6" stop-opacity=".4"/><stop offset="1" stop-color="#ffd6e6" stop-opacity="0"/></radialGradient>
+    <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f8fe8"/><stop offset=".55" stop-color="#7a74e0"/><stop offset="1" stop-color="#c36bd0"/></linearGradient>
+    <linearGradient id="lit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe7a6"/><stop offset="1" stop-color="#ffb866"/></linearGradient>
+    <linearGradient id="spill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd27a" stop-opacity=".8"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3f0e9"/><stop offset="1" stop-color="#f5efe6"/></linearGradient>
+    <g id="p"><circle cx="0" cy="-46" r="8.5"/><path d="M-12 0v-22a12 12 0 0 1 24 0v22z"/></g>
+  </defs>
+  <rect width="640" height="360" fill="url(#sky)"/>
+  <circle cx="320" cy="200" r="170" fill="url(#glow)"/>
+  <path d="M0 300C130 272 230 288 320 286 420 284 520 272 640 296V360H0Z" fill="url(#hill)"/>
+  <rect x="224" y="166" width="192" height="122" rx="5" fill="#fff" stroke="#e3dcec" stroke-width="2"/>
+  <path d="M208 172 320 92 432 172Z" fill="url(#roof)" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="244" y="190" width="46" height="38" rx="5" fill="url(#lit)"/><rect x="350" y="190" width="46" height="38" rx="5" fill="url(#lit)"/>
+  <path d="M267 190v38M244 209h46M373 190v38M350 209h46" stroke="#fff" stroke-width="3"/>
+  <rect x="301" y="228" width="38" height="60" rx="6" fill="url(#lit)"/>
+  <path d="M301 228h6a6 6 0 0 1 0 0v60h-6z" fill="#1b3a6b"/>
+  <polygon points="301,288 339,288 392,326 248,326" fill="url(#spill)"/>
+  <use href="#p" x="180" y="304" fill="#4f8fe8"/><use href="#p" x="214" y="300" fill="#3cbf8f"/>
+  <use href="#p" x="430" y="300" fill="#ef8a4c"/><use href="#p" x="466" y="304" fill="#a56bd6"/>
+</svg>

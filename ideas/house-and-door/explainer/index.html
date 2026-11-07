@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The House and the Door — Explainer</title>
+<!--
+  EXPLAINER · 6 scenes · 55s · Draft · Internal only
+  - Pure SVG + CSS keyframes: plays once on load even if SharePoint strips scripts.
+  - JS (optional) adds play / pause / replay / seek / scene jumps by driving the same
+    CSS animations through the Web Animations API — the timeline lives only in CSS.
+  - prefers-reduced-motion: every animation jumps to its end, so the final frame shows as a still.
+
+  HOW TIMING WORKS
+  Reusable effects (.fx-*) read per-element custom properties set inline:
+    --d   start time (seconds from the beginning of the film)
+    --dur duration          --dx / --rot / --to   effect-specific values
+  Elements that need two effects are wrapped in nested <g>s, one effect each.
+  The camera is one keyframe track across the whole film (see @keyframes cam).
+
+  SCENES
+    1 The house                0 – 8
+    2 The door                 8 – 17
+    3 Three ways in           17 – 27
+    4 AI opens the door       27 – 36
+    5 Strengths, not deficits 36 – 45
+    6 Where are the doors?    45 – 55
+-->
+<style>
+:root{
+  --font:"Segoe UI","Segoe UI Web (West European)",-apple-system,BlinkMacSystemFont,system-ui,Roboto,"Helvetica Neue",sans-serif;
+  --ink:#000;--ink-2:#323130;--ink-3:#605e5c;--navy:#1b3a6b;
+  --rainbow:linear-gradient(90deg,#2b88d8,#32c28a,#e6c35a,#f28a3c,#e14b7a,#c54bb5);
+  --shadow:0 0 1.25px rgba(0,0,0,.12),0 1.25px 2.5px rgba(0,0,0,.14);
+  --ease:cubic-bezier(.22,.8,.24,1);
+  --T:55s;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font);color:var(--ink);-webkit-font-smoothing:antialiased;
+  background:radial-gradient(70% 60% at 10% 0%,#f3eef7,transparent 70%),radial-gradient(60% 60% at 100% 100%,#e8f1f8,transparent 70%),#fbfafc;min-height:100vh}
+.wrap{max-width:1170px;margin:0 auto;padding:40px 24px 60px}
+.head{text-align:center;margin-bottom:24px}
+.eyebrow{font-size:13px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.6px}
+h1{font-size:30px;font-weight:600;margin:6px 0 8px}
+.head p{margin:0;color:var(--ink-2)}
+.badges{display:inline-flex;gap:6px;margin-top:12px}
+.badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:100px}
+.badge.draft{background:#fff4ce;color:#5c4400}.badge.internal{background:#e8eefa;color:var(--navy)}
+
+/* ---------- Player ---------- */
+.player{background:linear-gradient(45deg,#fff,rgba(255,255,255,.52));border:2px solid #fff;border-radius:20px;box-shadow:var(--shadow);padding:10px}
+.stage{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;container-type:inline-size;cursor:pointer;
+  background:linear-gradient(180deg,#eef4fb 0%,#f6f1f8 55%,#fbf6ef 100%)}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage text{font-family:var(--font)}
+svg *{transform-box:fill-box;transform-origin:50% 50%}
+
+.cap{position:absolute;left:0;right:0;top:5%;margin:0 auto;width:fit-content;max-width:64%;text-align:center;pointer-events:none;
+  padding:.7em 1.4em .8em;border-radius:1.1em;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:var(--shadow);font-size:1cqw}
+.cap h2{margin:0;font-weight:600;font-size:3.3cqw;line-height:1.2;letter-spacing:-.02em}
+.cap p{margin:.5em 0 0;font-size:1.9cqw;color:var(--ink-2)}
+.scene-tag{position:absolute;left:2.2%;bottom:4%;display:flex;align-items:center;gap:.6em;font-size:1.35cqw;font-weight:600;
+  background:rgba(255,255,255,.85);border-radius:100px;padding:.45em 1em .45em .5em;box-shadow:var(--shadow)}
+.scene-tag b{display:grid;place-items:center;width:1.9em;height:1.9em;border-radius:50%;background:#000;color:#fff;font-size:.9em}
+.endmark{position:absolute;right:2.2%;bottom:4%;font-size:1.35cqw;font-weight:600;background:#000;color:#fff;border-radius:.7em;padding:.6em 1em}
+
+/* ---------- Controls ---------- */
+.controls{display:flex;align-items:center;gap:12px;padding:12px 8px 4px}
+.cbtn{width:40px;height:40px;border-radius:10px;border:0;background:#000;color:#fff;display:grid;place-items:center;cursor:pointer;flex:0 0 auto}
+.cbtn.ghost{background:transparent;color:#000;border:2px solid #000}
+.cbtn svg{width:16px;height:16px}
+.scrub{flex:1;accent-color:#000;min-width:60px}
+.time{font:600 13px/1 var(--font);color:var(--ink-3);font-variant-numeric:tabular-nums;min-width:84px;text-align:right}
+.chapters{display:flex;gap:8px;flex-wrap:wrap;padding:8px}
+.chip{font:600 13px var(--font);border:1px solid #c8c6c4;background:#fff;border-radius:100px;padding:6px 14px;cursor:pointer}
+.chip.on{background:#000;border-color:#000;color:#fff}
+.nojs-note,.rm-note{font-size:13px;color:var(--ink-3);padding:8px}
+.js .nojs-note,.rm-note{display:none}
+.controls,.chapters{display:none}
+.js .controls,.js .chapters{display:flex}
+:focus-visible{outline:2px solid #000;outline-offset:3px}
+
+/* ---------- Notes ---------- */
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.note{background:linear-gradient(45deg,#fff,rgba(255,255,255,.52));border:2px solid #fff;border-radius:20px;box-shadow:var(--shadow);padding:24px}
+.note h3{margin:0 0 6px;font-size:17px}
+.note hr{height:2px;border:0;background:var(--rainbow);margin:10px 0 12px}
+.note p,.note li{font-size:14px;color:var(--ink-2);margin:0}
+.note ul{margin:0;padding-left:18px;display:grid;gap:6px}
+@media (max-width:860px){.notes{grid-template-columns:1fr}}
+@media (max-width:600px){.wrap{padding:28px 16px 44px}h1{font-size:24px}.time{display:none}
+  .cap h2{font-size:4.6cqw}.cap p{font-size:2.9cqw}.cap{max-width:92%}.scene-tag{display:none}.endmark{font-size:2.4cqw}}
+
+/* =====================================================================
+   EFFECTS
+   ===================================================================== */
+.clock{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;animation:clock var(--T) linear both} /* JS reads this; must not be display:none */
+.fx-fade  {animation:fade   var(--dur,.6s) var(--d,0s) var(--ease) both}
+.fx-out   {animation:out    var(--dur,.6s) var(--d,0s) ease both}
+.fx-io    {animation:io     var(--dur,1s)  var(--d,0s) linear both}
+.fx-pop   {animation:pop    var(--dur,.5s) var(--d,0s) var(--ease) both}
+.fx-rise  {transform-origin:50% 100%;animation:rise var(--dur,.8s) var(--d,0s) var(--ease) both}
+.fx-drop  {animation:drop   var(--dur,.8s) var(--d,0s) var(--ease) both}
+.fx-draw  {stroke-dasharray:1;animation:draw var(--dur,1s) var(--d,0s) var(--ease) both}      /* use with pathLength="1" */
+.fx-walkin{animation:walkin var(--dur,2s)  var(--d,0s) cubic-bezier(.3,.6,.4,1) both}
+.fx-to    {transform-origin:50% 100%;animation:goto var(--dur,1.8s) var(--d,0s) cubic-bezier(.45,0,.55,1) both}
+.fx-bob   {transform-origin:50% 100%;animation:bob .45s var(--d,0s) var(--n,4) ease-in-out both}
+.fx-fall  {animation:fall   var(--dur,.9s) var(--d,0s) cubic-bezier(.5,0,.75,0) both}
+.fx-swing {animation:swing  var(--dur,1s)  var(--d,0s) cubic-bezier(.65,0,.35,1) both}
+.fx-spark {transform-box:view-box;transform-origin:0 0;animation:spark var(--dur,1.6s) var(--d,0s) cubic-bezier(.45,0,.3,1) both}
+.fx-burst {animation:burst  var(--dur,.9s) var(--d,0s) ease-out both}
+.fx-dot   {transform-box:view-box;transform-origin:0 0;animation:dot var(--dur,1.6s) var(--d,0s) cubic-bezier(.45,0,.35,1) both}
+.fx-breathe{animation:breathe 2.4s var(--d,0s) 3 ease-in-out both}
+.cap-io   {animation:capio  var(--dur) var(--d,0s) var(--ease) both}
+.cap-in   {animation:capin  .8s var(--d,0s) var(--ease) both}
+.tag-io   {animation:tagio  var(--dur) var(--d,0s) linear both}
+.cam      {transform-box:view-box;transform-origin:800px 640px;animation:cam var(--T) linear both}
+
+@keyframes clock {from{opacity:0}to{opacity:0}}
+@keyframes fade  {from{opacity:0}}
+@keyframes out   {to{opacity:0}}
+@keyframes io    {0%{opacity:0}15%,85%{opacity:1}100%{opacity:0}}
+@keyframes pop   {from{transform:scale(.4);opacity:0}70%{transform:scale(1.06)}}
+@keyframes rise  {from{transform:scaleY(0)}}
+@keyframes drop  {from{transform:translateY(-90px);opacity:0}}
+@keyframes draw  {from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes walkin{from{transform:translateX(var(--dx))}}
+@keyframes goto  {0%{transform:none;opacity:1}72%{opacity:1}100%{transform:translateX(var(--dx)) scale(.72);opacity:0}}
+@keyframes bob   {50%{transform:translateY(-7px) scaleY(1.02)}}
+@keyframes fall  {to{transform:translateY(var(--fy,90px)) rotate(var(--rot,20deg));opacity:0}}
+@keyframes swing {to{transform:var(--to)}}
+@keyframes spark {0%{transform:translate(800px,90px) rotate(0) scale(.3);opacity:0}15%{opacity:1}
+                  70%{transform:translate(800px,646px) rotate(200deg) scale(1)}82%{transform:translate(800px,646px) rotate(240deg) scale(1.35);opacity:1}
+                  100%{transform:translate(800px,646px) rotate(280deg) scale(.2);opacity:0}}
+@keyframes burst {from{transform:scale(.2);opacity:1}to{transform:scale(3.2);opacity:0}}
+@keyframes dot   {0%{transform:translate(250px,530px);opacity:0}12%{opacity:1}55%{transform:translate(var(--x),530px)}100%{transform:translate(var(--x),var(--y));opacity:1}}
+@keyframes breathe{50%{opacity:.55}}
+@keyframes capio {0%{opacity:0;transform:translateY(10px)}12%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+@keyframes capin {from{opacity:0;transform:translateY(10px)}}
+@keyframes tagio {0%{opacity:0}6%,94%{opacity:1}100%{opacity:0}}
+/* camera: 0–8 wide · 8–9.6 push in · hold · 17.4–19 pull back · hold · 45–46.2 fade away  (percent = s / 55) */
+@keyframes cam{
+  0%,14.545%      {transform:scale(1);opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+  17.455%,31.636% {transform:scale(2.2);opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+  34.545%,81.818% {transform:scale(1);opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+  84%,100%        {transform:scale(.92);opacity:0}}
+
+.cap,.scene-tag{opacity:0}.cap.final,.scene-tag.final{opacity:1}
+
+/* Embed mode (?embed): used inside the hub — no page chrome, scene chips hidden */
+html.embed body{background:transparent;min-height:0}
+html.embed .wrap{max-width:none;padding:0}
+html.embed .head,html.embed .notes,html.embed .chapters{display:none!important}
+html.embed .player{background:none;border:0;box-shadow:none;padding:0}
+html.embed .controls{padding:10px 2px 0}
+
+/* Reduced motion: jump every animation to its end → the final frame as a still */
+@media (prefers-reduced-motion:reduce){
+  .stage *{animation-duration:1ms!important;animation-delay:0s!important;animation-iteration-count:1!important}
+  .controls,.chapters,.js .controls,.js .chapters,.nojs-note{display:none!important}
+  .rm-note{display:block!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div class="eyebrow">Animated explainer · 55 seconds</div>
+    <h1>The House and the Door</h1>
+    <p>The metaphor in six scenes, with on-screen text and no voiceover.</p>
+    <div class="badges"><span class="badge draft">Draft</span><span class="badge internal">Internal only</span></div>
+  </header>
+
+  <section class="player" aria-label="Animated explainer">
+    <div class="stage" id="stage" role="img" aria-label="Animation in six scenes. A lit house stands for economic opportunity. Its door, the labor market, is locked and tagged Degree, Pedigree and Job title while people wait outside. Some people were born inside, some enter the front door with a degree, and some build their own door by starting a business. A spark of AI unlocks the door and it swings open. People walk in, each showing a strength such as curiosity or courage. Finally the house becomes a company floor plan with rooms for hiring, promotion, pay and internal mobility, and each locked door opens. Closing question: where are the doors in your organization?">
+      <svg viewBox="0 0 1600 900" aria-hidden="true">
+        <defs>
+          <radialGradient id="gGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#ffe3b3" stop-opacity=".95"/><stop offset=".55" stop-color="#ffd6e6" stop-opacity=".45"/><stop offset="1" stop-color="#ffd6e6" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="gRoof" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f8fe8"/><stop offset=".55" stop-color="#7a74e0"/><stop offset="1" stop-color="#c36bd0"/></linearGradient>
+          <linearGradient id="gWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#f3f0f7"/></linearGradient>
+          <linearGradient id="gLit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe7a6"/><stop offset="1" stop-color="#ffb866"/></linearGradient>
+          <linearGradient id="gDoor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a4f8c"/><stop offset="1" stop-color="#1b3a6b"/></linearGradient>
+          <linearGradient id="gHill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3f0e9"/><stop offset="1" stop-color="#f5efe6"/></linearGradient>
+          <linearGradient id="gSpill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd27a" stop-opacity=".85"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></linearGradient>
+          <linearGradient id="gRain" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#2b88d8"/><stop offset=".2" stop-color="#32c28a"/><stop offset=".4" stop-color="#e6c35a"/><stop offset=".6" stop-color="#f28a3c"/><stop offset=".8" stop-color="#e14b7a"/><stop offset="1" stop-color="#c54bb5"/>
+          </linearGradient>
+          <!-- user-space gradient: flat lines have a zero-height box, so a bounding-box gradient would not render on them -->
+          <linearGradient id="gLeaf" gradientUnits="userSpaceOnUse" x1="580" y1="0" x2="1020" y2="0"><stop offset="0" stop-color="#2b88d8"/><stop offset=".35" stop-color="#32c28a"/><stop offset=".65" stop-color="#f28a3c"/><stop offset="1" stop-color="#c54bb5"/></linearGradient>
+          <linearGradient id="gSpark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4fa7ff"/><stop offset=".35" stop-color="#3ccf9a"/><stop offset=".65" stop-color="#f6c95c"/><stop offset="1" stop-color="#e05a86"/></linearGradient>
+          <g id="person"><circle cx="0" cy="-116" r="21"/><path d="M-30 0v-56a30 30 0 0 1 60 0v56z"/></g>
+          <g id="mini"><circle cx="0" cy="-34" r="9"/><path d="M-13 0v-14a13 13 0 0 1 26 0v14z"/></g>
+          <g id="lockS"><path d="M-10 2v-8a10 10 0 0 1 20 0v8" stroke="#000" stroke-width="5" fill="none"/><rect x="-16" y="0" width="32" height="26" rx="6" fill="#000"/><circle cx="0" cy="11" r="4" fill="#fff"/></g>
+          <clipPath id="clipW1"><rect x="606" y="468" width="118" height="96" rx="10"/></clipPath>
+          <clipPath id="clipW2"><rect x="876" y="468" width="118" height="96" rx="10"/></clipPath>
+        </defs>
+
+        <!-- ================= WORLD (camera) ================= -->
+        <g class="cam">
+          <circle class="fx-fade" style="--d:2.6s;--dur:1.2s" cx="800" cy="470" r="380" fill="url(#gGlow)"/>
+          <path class="fx-fade" style="--d:.2s;--dur:1.2s" d="M0 760 C300 700 560 735 800 728 C1050 720 1300 700 1600 750 V900 H0Z" fill="url(#gHill)"/>
+          <path class="fx-draw" style="--d:.1s;--dur:1.1s" pathLength="1" d="M80 720 H1520" stroke="#c9c3d6" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+          <rect class="fx-rise" style="--d:2s;--dur:.5s" x="930" y="250" width="44" height="110" rx="6" fill="#d9d2e8"/>
+          <rect class="fx-rise" style="--d:.6s;--dur:.9s" x="560" y="400" width="480" height="320" rx="8" fill="url(#gWall)" stroke="#e3dcec" stroke-width="3"/>
+          <path class="fx-drop" style="--d:1.4s" d="M520 414 L800 210 L1080 414 Z" fill="url(#gRoof)" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+
+          <!-- windows -->
+          <rect x="606" y="468" width="118" height="96" rx="10" fill="#e4e0ee"/>
+          <rect x="876" y="468" width="118" height="96" rx="10" fill="#e4e0ee"/>
+          <rect class="fx-fade" style="--d:2.7s;--dur:.5s" x="606" y="468" width="118" height="96" rx="10" fill="url(#gLit)"/>
+          <rect class="fx-fade" style="--d:3s;--dur:.5s" x="876" y="468" width="118" height="96" rx="10" fill="url(#gLit)"/>
+          <g clip-path="url(#clipW1)" fill="#c46a3a" opacity=".55">
+            <use class="fx-pop" style="--d:4.1s;--dur:.6s" href="#mini" x="645" y="566"/>
+            <use class="fx-pop" style="--d:4.3s;--dur:.6s" href="#mini" x="684" y="566"/>
+            <use class="fx-pop" style="--d:41.6s;--dur:.6s" href="#mini" x="711" y="566"/>
+          </g>
+          <g clip-path="url(#clipW2)" fill="#c46a3a" opacity=".55">
+            <use class="fx-pop" style="--d:4.5s;--dur:.6s" href="#mini" x="935" y="566"/>
+            <use class="fx-pop" style="--d:41.0s;--dur:.6s" href="#mini" x="900" y="566"/>
+            <use class="fx-pop" style="--d:41.3s;--dur:.6s" href="#mini" x="968" y="566"/>
+          </g>
+          <path d="M665 468v96M606 516h118M935 468v96M876 516h118" stroke="#fff" stroke-width="5"/>
+
+          <!-- front door: warm doorway behind, leaf in front swings open in scene 4 -->
+          <ellipse class="fx-fade" style="--d:31.8s;--dur:1.2s" cx="800" cy="650" rx="150" ry="150" fill="url(#gGlow)"/>
+          <rect class="fx-fade" style="--d:2.4s;--dur:.3s" x="752" y="572" width="96" height="148" rx="12" fill="url(#gLit)"/>
+          <g class="fx-swing" style="--d:31.5s;--dur:1.1s;--to:scaleX(.14);transform-box:view-box;transform-origin:752px 646px">
+            <rect class="fx-rise" style="--d:2.2s;--dur:.5s" x="752" y="572" width="96" height="148" rx="12" fill="url(#gDoor)"/>
+            <circle class="fx-fade" style="--d:2.5s;--dur:.3s" cx="828" cy="650" r="5" fill="#ffd27a"/>
+          </g>
+          <polygon class="fx-fade" style="--d:32s;--dur:1.2s" points="752,722 848,722 990,820 610,820" fill="url(#gSpill)"/>
+          <rect x="740" y="716" width="120" height="8" rx="4" fill="#d9d2e8"/>
+
+          <!-- side door, built in scene 3 -->
+          <rect class="fx-fade" style="--d:25s;--dur:.5s" x="950" y="598" width="60" height="122" rx="12" fill="url(#gDoor)"/>
+          <path class="fx-draw" style="--d:24.4s;--dur:.8s" pathLength="1" d="M950 720V610a12 12 0 0 1 12-12h36a12 12 0 0 1 12 12v110" stroke="#1b3a6b" stroke-width="5" fill="none" stroke-linejoin="round"/>
+          <circle class="fx-fade" style="--d:25.1s;--dur:.3s" cx="999" cy="662" r="4" fill="#ffd27a"/>
+        </g>
+
+        <!-- ================= SCENE 2 · The door (zoomed, screen space) ================= -->
+        <g class="fx-out" style="--d:17s">
+          <path class="fx-draw" style="--d:10.2s" pathLength="1" d="M800 652 C700 600 620 560 548 498" stroke="#000" stroke-opacity=".45" stroke-width="3" fill="none"/>
+          <path class="fx-draw" style="--d:10.6s" pathLength="1" d="M800 652 C800 560 800 470 800 402" stroke="#000" stroke-opacity=".45" stroke-width="3" fill="none"/>
+          <path class="fx-draw" style="--d:11s" pathLength="1" d="M800 652 C900 600 980 560 1052 498" stroke="#000" stroke-opacity=".45" stroke-width="3" fill="none"/>
+          <g class="fx-pop" style="--d:9.8s">
+            <path d="M776 640v-16a24 24 0 0 1 48 0v16" stroke="#000" stroke-width="9" fill="none"/>
+            <rect x="764" y="636" width="72" height="56" rx="12" fill="#000"/>
+            <circle cx="800" cy="660" r="7" fill="#fff"/><rect x="797" y="662" width="6" height="16" rx="3" fill="#fff"/>
+          </g>
+          <g class="fx-pop" style="--d:10.5s"><rect x="366" y="444" width="250" height="60" rx="14"/><text x="491" y="483" text-anchor="middle" font-size="26" font-weight="600" fill="#fff">Degree required</text></g>
+          <g class="fx-pop" style="--d:10.9s"><rect x="690" y="342" width="220" height="60" rx="14"/><text x="800" y="381" text-anchor="middle" font-size="26" font-weight="600" fill="#fff">Pedigree</text></g>
+          <g class="fx-pop" style="--d:11.3s"><rect x="984" y="444" width="220" height="60" rx="14"/><text x="1094" y="483" text-anchor="middle" font-size="26" font-weight="600" fill="#fff">Job title</text></g>
+          <g class="fx-walkin" style="--d:11.2s;--dur:2.2s;--dx:-640px">
+            <g class="fx-bob" style="--d:11.2s;--n:5"><use href="#person" x="320" y="826" fill="#4f8fe8"/></g>
+            <g class="fx-bob" style="--d:11.2s;--n:5"><use href="#person" x="440" y="830" fill="#3cbf8f"/></g>
+            <g class="fx-bob" style="--d:11.2s;--n:5"><use href="#person" x="560" y="824" fill="#e6b84a"/></g>
+          </g>
+          <g class="fx-walkin" style="--d:11.6s;--dur:2.2s;--dx:640px">
+            <g class="fx-bob" style="--d:11.6s;--n:5"><use href="#person" x="1040" y="828" fill="#ef8a4c"/></g>
+            <g class="fx-bob" style="--d:11.6s;--n:5"><use href="#person" x="1160" y="824" fill="#e05a86"/></g>
+            <g class="fx-bob" style="--d:11.6s;--n:5"><use href="#person" x="1280" y="830" fill="#a56bd6"/></g>
+          </g>
+        </g>
+
+        <!-- ================= SCENE 3 · Three ways in ================= -->
+        <g class="fx-out" style="--d:26.6s">
+          <!-- a · born inside -->
+          <rect class="fx-pop" style="--d:19.6s" x="598" y="460" width="134" height="112" rx="16" fill="none" stroke="url(#gRain)" stroke-width="5"/>
+          <path class="fx-draw" style="--d:19.9s;--dur:.4s" pathLength="1" d="M540 512H598" stroke="#000" stroke-width="2" fill="none"/>
+          <g class="fx-pop" style="--d:19.9s"><rect x="330" y="488" width="210" height="48" rx="12"/><text x="435" y="520" text-anchor="middle" font-size="22" font-weight="600" fill="#fff">Born inside</text></g>
+          <!-- b · front door with a degree -->
+          <rect class="fx-io" style="--d:21.4s;--dur:1.6s" x="742" y="562" width="116" height="168" rx="18" fill="none" stroke="url(#gRain)" stroke-width="5"/>
+          <g class="fx-walkin" style="--d:20.1s;--dur:1.9s;--dx:-900px">
+            <g class="fx-to" style="--d:22s;--dur:.7s;--dx:0px">
+              <g class="fx-bob" style="--d:20.3s;--n:4">
+                <g transform="translate(800 722) scale(.8)">
+                  <use href="#person" fill="#4f8fe8"/>
+                  <rect x="22" y="-60" width="44" height="14" rx="4" fill="#fff" stroke="#c8c6c4" stroke-width="2"/><rect x="40" y="-60" width="7" height="14" fill="#e14b7a"/>
+                </g>
+              </g>
+            </g>
+          </g>
+          <g class="fx-pop" style="--d:21s"><rect x="580" y="750" width="440" height="46" rx="12"/><text x="800" y="781" text-anchor="middle" font-size="21" font-weight="600" fill="#fff">Through the front door, with a degree</text></g>
+          <!-- c · build your own door -->
+          <g class="fx-walkin" style="--d:23s;--dur:1.4s;--dx:640px">
+            <g class="fx-to" style="--d:25.3s;--dur:.8s;--dx:-80px">
+              <g class="fx-bob" style="--d:23s;--n:3"><use href="#person" transform="translate(1062 722) scale(.8)" fill="#e05a86"/></g>
+            </g>
+          </g>
+          <g class="fx-pop" style="--d:24.6s"><rect x="1052" y="548" width="290" height="46" rx="12"/><text x="1197" y="579" text-anchor="middle" font-size="21" font-weight="600" fill="#fff">Or build your own door</text></g>
+        </g>
+
+        <!-- ================= SCENE 4 · AI opens the door ================= -->
+        <g class="fx-out" style="--d:35.4s">
+          <g class="fx-pop" style="--d:27.4s"><g class="fx-fall" style="--d:30.8s;--rot:28deg;--fy:110px"><use href="#lockS" x="800" y="640"/></g></g>
+          <g class="fx-pop" style="--d:27.8s"><g class="fx-fall" style="--d:31s;--rot:-18deg;--fy:300px"><rect x="625" y="424" width="110" height="34" rx="9"/><text x="680" y="447" text-anchor="middle" font-size="17" font-weight="600" fill="#fff">Degree</text></g></g>
+          <g class="fx-pop" style="--d:28s"><g class="fx-fall" style="--d:31.15s;--rot:10deg;--fy:300px"><rect x="740" y="424" width="120" height="34" rx="9"/><text x="800" y="447" text-anchor="middle" font-size="17" font-weight="600" fill="#fff">Pedigree</text></g></g>
+          <g class="fx-pop" style="--d:28.2s"><g class="fx-fall" style="--d:31.3s;--rot:22deg;--fy:300px"><rect x="865" y="424" width="110" height="34" rx="9"/><text x="920" y="447" text-anchor="middle" font-size="17" font-weight="600" fill="#fff">Job title</text></g></g>
+          <g class="fx-spark" style="--d:29.2s;--dur:1.6s">
+            <circle r="46" fill="url(#gGlow)"/>
+            <path d="M0-40C5-11 11-5 40 0 11 5 5 11 0 40-5 11-11 5-40 0-11-5-5-11 0-40Z" fill="url(#gSpark)"/>
+          </g>
+          <circle class="fx-burst" style="--d:30.5s" cx="800" cy="652" r="46" fill="none" stroke="url(#gRain)" stroke-width="6"/>
+        </g>
+
+        <!-- ================= SCENES 4–5 · the crowd arrives, shows strengths, walks in ================= -->
+        <!-- each person: arrive (walkin) › walk to the door (to) › bob › figure + strength badge -->
+        <g class="fx-walkin" style="--d:27s;--dur:1.9s;--dx:-560px"><g class="fx-to" style="--d:39.8s;--dx:550px">
+          <g class="fx-bob" style="--d:27s"><g class="fx-bob" style="--d:39.8s"><use href="#person" transform="translate(250 722) scale(.8)" fill="#4f8fe8"/></g></g>
+          <g class="fx-pop" style="--d:36.6s"><rect x="190" y="528" width="120" height="34" rx="17" fill="#fff" stroke="url(#gRain)" stroke-width="3"/><text x="250" y="551" text-anchor="middle" font-size="17" font-weight="600">Curiosity</text></g>
+        </g></g>
+        <g class="fx-walkin" style="--d:27.2s;--dur:1.9s;--dx:-560px"><g class="fx-to" style="--d:39.1s;--dx:420px">
+          <g class="fx-bob" style="--d:27.2s"><g class="fx-bob" style="--d:39.1s"><use href="#person" transform="translate(380 722) scale(.8)" fill="#3cbf8f"/></g></g>
+          <g class="fx-pop" style="--d:36.85s"><rect x="320" y="568" width="120" height="34" rx="17" fill="#fff" stroke="url(#gRain)" stroke-width="3"/><text x="380" y="591" text-anchor="middle" font-size="17" font-weight="600">Courage</text></g>
+        </g></g>
+        <g class="fx-walkin" style="--d:27.4s;--dur:1.9s;--dx:-560px"><g class="fx-to" style="--d:38.4s;--dx:290px">
+          <g class="fx-bob" style="--d:27.4s"><g class="fx-bob" style="--d:38.4s"><use href="#person" transform="translate(510 722) scale(.8)" fill="#e6b84a"/></g></g>
+          <g class="fx-pop" style="--d:37.1s"><rect x="432" y="528" width="156" height="34" rx="17" fill="#fff" stroke="url(#gRain)" stroke-width="3"/><text x="510" y="551" text-anchor="middle" font-size="17" font-weight="600">Communication</text></g>
+        </g></g>
+        <g class="fx-walkin" style="--d:27.1s;--dur:1.9s;--dx:560px"><g class="fx-to" style="--d:38.4s;--dx:-290px">
+          <g class="fx-bob" style="--d:27.1s"><g class="fx-bob" style="--d:38.4s"><use href="#person" transform="translate(1090 722) scale(.8)" fill="#ef8a4c"/></g></g>
+          <g class="fx-pop" style="--d:37.35s"><rect x="1025" y="528" width="130" height="34" rx="17" fill="#fff" stroke="url(#gRain)" stroke-width="3"/><text x="1090" y="551" text-anchor="middle" font-size="17" font-weight="600">Creativity</text></g>
+        </g></g>
+        <g class="fx-walkin" style="--d:27.3s;--dur:1.9s;--dx:560px"><g class="fx-to" style="--d:39.1s;--dx:-420px">
+          <g class="fx-bob" style="--d:27.3s"><g class="fx-bob" style="--d:39.1s"><use href="#person" transform="translate(1220 722) scale(.8)" fill="#e05a86"/></g></g>
+          <g class="fx-pop" style="--d:37.6s"><rect x="1150" y="568" width="140" height="34" rx="17" fill="#fff" stroke="url(#gRain)" stroke-width="3"/><text x="1220" y="591" text-anchor="middle" font-size="17" font-weight="600">Compassion</text></g>
+        </g></g>
+        <g class="fx-walkin" style="--d:27.5s;--dur:1.9s;--dx:560px"><g class="fx-to" style="--d:39.8s;--dx:-550px">
+          <g class="fx-bob" style="--d:27.5s"><g class="fx-bob" style="--d:39.8s"><use href="#person" transform="translate(1350 722) scale(.8)" fill="#a56bd6"/></g></g>
+          <g class="fx-pop" style="--d:37.85s"><rect x="1285" y="528" width="130" height="34" rx="17" fill="#fff" stroke="url(#gRain)" stroke-width="3"/><text x="1350" y="551" text-anchor="middle" font-size="17" font-weight="600">Resilience</text></g>
+        </g></g>
+
+        <!-- ================= SCENE 6 · Where are the doors in your organization? ================= -->
+        <g>
+          <rect class="fx-fade" style="--d:46.6s;--dur:.8s" x="360" y="300" width="420" height="210" fill="#eef4fb"/>
+          <rect class="fx-fade" style="--d:46.7s;--dur:.8s" x="820" y="300" width="420" height="210" fill="#f3eef7"/>
+          <rect class="fx-fade" style="--d:46.8s;--dur:.8s" x="360" y="550" width="420" height="210" fill="#eef7f2"/>
+          <rect class="fx-fade" style="--d:46.9s;--dur:.8s" x="820" y="550" width="420" height="210" fill="#fbf1ea"/>
+          <path class="fx-draw" style="--d:45.8s;--dur:1.6s" pathLength="1" fill="none" stroke="#1b3a6b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"
+                d="M360 510V300H1240V510M1240 550V760H360V550"/>
+          <path class="fx-draw" style="--d:46.2s;--dur:1.3s" pathLength="1" fill="none" stroke="#1b3a6b" stroke-width="5" stroke-linecap="round"
+                d="M360 510H640M700 510H780V300M820 300V510H900M960 510H1240M360 550H640M700 550H780V760M820 760V550H900M960 550H1240"/>
+          <text class="fx-fade" style="--d:47s" x="540" y="416" text-anchor="middle" font-size="30" font-weight="600">Hiring</text>
+          <text class="fx-fade" style="--d:47.2s" x="1080" y="416" text-anchor="middle" font-size="30" font-weight="600">Promotion</text>
+          <text class="fx-fade" style="--d:47.4s" x="540" y="666" text-anchor="middle" font-size="30" font-weight="600">Pay</text>
+          <text class="fx-fade" style="--d:47.6s" x="1080" y="666" text-anchor="middle" font-size="30" font-weight="600">Internal mobility</text>
+          <text class="fx-fade" style="--d:47.8s" x="800" y="537" text-anchor="middle" font-size="16" font-weight="600" fill="#605e5c" letter-spacing="2">YOUR ORGANIZATION</text>
+
+          <!-- door leaves: closed across each gap, swing 90° into the room -->
+          <g class="fx-fade" style="--d:47.4s">
+            <path class="fx-draw" style="--d:49.3s;--dur:.9s" pathLength="1" d="M700 510A60 60 0 0 0 640 450" fill="none" stroke="#8a8886" stroke-width="2"/>
+            <path class="fx-draw" style="--d:49.8s;--dur:.9s" pathLength="1" d="M960 510A60 60 0 0 0 900 450" fill="none" stroke="#8a8886" stroke-width="2"/>
+            <path class="fx-draw" style="--d:50.3s;--dur:.9s" pathLength="1" d="M700 550A60 60 0 0 1 640 610" fill="none" stroke="#8a8886" stroke-width="2"/>
+            <path class="fx-draw" style="--d:50.8s;--dur:.9s" pathLength="1" d="M960 550A60 60 0 0 1 900 610" fill="none" stroke="#8a8886" stroke-width="2"/>
+            <line class="fx-swing" style="--d:49.2s;--to:rotate(-90deg);transform-box:view-box;transform-origin:640px 510px" x1="640" y1="510" x2="700" y2="510" stroke="url(#gLeaf)" stroke-width="7" stroke-linecap="round"/>
+            <line class="fx-swing" style="--d:49.7s;--to:rotate(-90deg);transform-box:view-box;transform-origin:900px 510px" x1="900" y1="510" x2="960" y2="510" stroke="url(#gLeaf)" stroke-width="7" stroke-linecap="round"/>
+            <line class="fx-swing" style="--d:50.2s;--to:rotate(90deg);transform-box:view-box;transform-origin:640px 550px" x1="640" y1="550" x2="700" y2="550" stroke="url(#gLeaf)" stroke-width="7" stroke-linecap="round"/>
+            <line class="fx-swing" style="--d:50.7s;--to:rotate(90deg);transform-box:view-box;transform-origin:900px 550px" x1="900" y1="550" x2="960" y2="550" stroke="url(#gLeaf)" stroke-width="7" stroke-linecap="round"/>
+          </g>
+          <g class="fx-pop" style="--d:47.9s"><g class="fx-fall" style="--d:49s;--fy:40px;--rot:-20deg"><use href="#lockS" x="670" y="497"/></g></g>
+          <g class="fx-pop" style="--d:48.05s"><g class="fx-fall" style="--d:49.5s;--fy:40px;--rot:20deg"><use href="#lockS" x="930" y="497"/></g></g>
+          <g class="fx-pop" style="--d:48.2s"><g class="fx-fall" style="--d:50s;--fy:40px;--rot:-20deg"><use href="#lockS" x="670" y="537"/></g></g>
+          <g class="fx-pop" style="--d:48.35s"><g class="fx-fall" style="--d:50.5s;--fy:40px;--rot:20deg"><use href="#lockS" x="930" y="537"/></g></g>
+
+          <!-- people flow in once the doors open -->
+          <circle class="fx-dot" style="--d:50.3s;--x:670px;--y:440px" r="11" fill="#4f8fe8"/>
+          <circle class="fx-dot" style="--d:50.7s;--x:930px;--y:440px" r="11" fill="#3cbf8f"/>
+          <circle class="fx-dot" style="--d:51.1s;--x:670px;--y:620px" r="11" fill="#e6b84a"/>
+          <circle class="fx-dot" style="--d:51.5s;--x:930px;--y:620px" r="11" fill="#e05a86"/>
+          <circle class="fx-dot" style="--d:51.9s;--x:700px;--y:460px" r="11" fill="#a56bd6"/>
+          <circle class="fx-dot" style="--d:52.3s;--x:960px;--y:640px" r="11" fill="#ef8a4c"/>
+        </g>
+      </svg>
+
+      <!-- scene tags -->
+      <div class="scene-tag tag-io" style="--d:0s;--dur:8.4s"><b>1</b>The house</div>
+      <div class="scene-tag tag-io" style="--d:8.4s;--dur:8.6s"><b>2</b>The door</div>
+      <div class="scene-tag tag-io" style="--d:17s;--dur:10s"><b>3</b>Three ways in</div>
+      <div class="scene-tag tag-io" style="--d:27s;--dur:9s"><b>4</b>AI opens the door</div>
+      <div class="scene-tag tag-io" style="--d:36s;--dur:9s"><b>5</b>Strengths, not deficits</div>
+      <div class="scene-tag final cap-in" style="--d:45s"><b>6</b>Where are the doors?</div>
+
+      <!-- captions -->
+      <div class="cap cap-io" style="--d:3.2s;--dur:4.8s"><h2>Think of economic opportunity as a house.</h2><p class="fx-fade" style="--d:4.6s">Inside are good jobs, growth and a path upward.</p></div>
+      <div class="cap cap-io" style="--d:13.2s;--dur:3.8s"><h2>The labor market is the door.</h2><p class="fx-fade" style="--d:14s">And it's gated by degrees, job titles and pedigree.</p></div>
+      <div class="cap cap-io" style="--d:19.2s;--dur:7.4s"><h2>There have been three ways in.</h2><p class="fx-fade" style="--d:20s">Born inside, through the front door with a degree, or by starting a business.</p></div>
+      <div class="cap cap-io" style="--d:32.2s;--dur:3.4s"><h2>AI opens the door.</h2><p class="fx-fade" style="--d:32.9s">“The most democratizing technology we've ever had.”</p></div>
+      <div class="cap cap-io" style="--d:36.8s;--dur:8s"><h2>Everyone starts from their strengths.</h2><p class="fx-fade" style="--d:37.6s">Not their deficits. The human skills we all have become the way in.</p></div>
+      <div class="cap final cap-in" style="--d:46.4s"><h2>Where are the doors in your organization?</h2><p class="fx-fade" style="--d:47.2s">Open them by hiring, promoting and paying for human skills.</p></div>
+      <div class="endmark fx-fade" style="--d:52.8s">The Frontier Mindset Lab</div>
+      <i class="clock" aria-hidden="true"></i>
+    </div>
+
+    <div class="controls" role="group" aria-label="Playback">
+      <button class="cbtn" id="play" aria-label="Pause"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg></button>
+      <button class="cbtn ghost" id="replay" aria-label="Replay from start"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 8a5.5 5.5 0 1 0 1.7-4"/><path d="M2 2v3.5h3.5"/></svg></button>
+      <input class="scrub" id="scrub" type="range" min="0" max="55000" step="10" value="0" aria-label="Seek">
+      <span class="time" id="time">0:00 / 0:55</span>
+    </div>
+    <div class="chapters" role="group" aria-label="Scenes">
+      <button class="chip on" data-at="0">1 · The house</button>
+      <button class="chip" data-at="8000">2 · The door</button>
+      <button class="chip" data-at="17000">3 · Three ways in</button>
+      <button class="chip" data-at="27000">4 · AI opens the door</button>
+      <button class="chip" data-at="36000">5 · Strengths, not deficits</button>
+      <button class="chip" data-at="45000">6 · Where are the doors?</button>
+    </div>
+    <p class="nojs-note">Plays once on load. Reload the page to watch again.</p>
+    <p class="rm-note">Motion is reduced on this device, so this is a still of the final frame.</p>
+  </section>
+
+  <section class="notes" aria-label="Notes">
+    <div class="note"><h3>Source beats</h3><hr><p>Scenes 1–5 follow beats 1–5 of the AfroTech clip (0:00–1:50). Scene 6 is the leader translation from <code>idea.json</code>. Beat 6 is held until it's reviewed.</p></div>
+    <div class="note"><h3>Wording choices</h3><hr><ul><li>"Snuck through" is shown as building your own door.</li><li>The one direct quote, in scene 4, is from beat 4.</li><li>The strengths in scene 5 are six of the human capabilities named in the narrative (Curiosity, Courage, Communication, Creativity, Compassion, Resilience).</li></ul></div>
+    <div class="note"><h3>Still open</h3><hr><ul><li>Voiceover vs. text only (Aneesh's audio needs Lab sign-off).</li><li>Where it lives: the hub's featured section, and exported video.</li></ul></div>
+  </section>
+</div>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var embed=/[?&]embed\b/.test(location.search);
+  if(embed)document.documentElement.classList.add('embed');
+  var stage=document.getElementById('stage');
+  if(!stage.getAnimations||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var T=55000, play=document.getElementById('play'), scrub=document.getElementById('scrub'),
+      time=document.getElementById('time'), chips=[].slice.call(document.querySelectorAll('.chip[data-at]'));
+  var icons={pause:play.innerHTML,
+    play:'<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9.5-5.5z"/></svg>',
+    replay:document.getElementById('replay').innerHTML};
+  function anims(){return stage.getAnimations({subtree:true})}
+  function master(){return anims().filter(function(a){return a.animationName==='clock'})[0]}
+  function fmt(ms){var s=Math.floor(ms/1000);return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60}
+  function setBtn(state){play.innerHTML=icons[state];play.setAttribute('aria-label',state==='pause'?'Pause':state==='play'?'Play':'Replay')}
+  function seek(ms){anims().forEach(function(a){a.currentTime=ms})}
+  function isPlaying(){var m=master();return !!m&&m.playState==='running'}
+  function playAll(){var m=master();if(m&&m.currentTime>=T)seek(0);anims().forEach(function(a){a.play()});setBtn('pause')}
+  function pauseAll(){anims().forEach(function(a){a.pause()});setBtn('play')}
+  function toggle(){isPlaying()?pauseAll():playAll()}
+
+  play.addEventListener('click',toggle);
+  stage.addEventListener('click',toggle);
+  document.getElementById('replay').addEventListener('click',function(){seek(0);playAll()});
+  scrub.addEventListener('input',function(){pauseAll();seek(+scrub.value)});
+  chips.forEach(function(c){c.addEventListener('click',function(){seek(+c.dataset.at);playAll()})});
+  document.addEventListener('keydown',function(e){if(e.code==='Space'&&e.target===document.body){e.preventDefault();toggle()}});
+
+  /* Embedded: wait at 0:00, start the first time the player is mostly on screen */
+  if(embed){
+    seek(0);pauseAll();
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.intersectionRatio>=.6){playAll();io.disconnect();}
+      })},{threshold:[.6]});
+      io.observe(stage);
+    }
+  }
+
+  (function tick(){
+    var m=master();
+    if(m){var t=Math.min(+m.currentTime||0,T);
+      if(document.activeElement!==scrub)scrub.value=t;
+      time.textContent=fmt(t)+' / '+fmt(T);
+      chips.forEach(function(c,i){var n=chips[i+1];c.classList.toggle('on',t>=+c.dataset.at&&(!n||t<+n.dataset.at))});
+      if(t>=T&&play.getAttribute('aria-label')!=='Replay')setBtn('replay');}
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+</body>
+</html>
