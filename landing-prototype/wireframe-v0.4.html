@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="MSRAI_Label_c3feb43e-95d4-42a1-ae97-85d136991a95_AI_Disclosure" content="Made with AI">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Frontier Mindset Lab – January Landing Page Wireframe v0.4 (matched to prototype)</title>
+<style>
+:root{
+  --ink:#1b1b1f; --muted:#5b5b66; --line:#dcdbe4; --paper:#ffffff;
+  --indigo:#25239a; --purple:#7b4fc4; --pink:#d06c9f; --peach:#f3c9a4; --navy:#1f2a8f;
+  --warm:#f6f4f0; --lav:#f4f3fa; --grey:#e9e8ee;
+  --grad:linear-gradient(90deg,var(--indigo),var(--purple) 45%,var(--pink) 75%,var(--peach));
+  --ph:#ecebf3; --hatch:#dcdaea;
+  --note:#fff6cc; --note-line:#e3c94f; --note-ink:#4a3d00;
+  --keep:#1c7c54; --keep-soft:#dff3e9; --adapt:#9a6700; --adapt-soft:#fbefd5;
+  --retire:#b3261e; --retire-soft:#fde7e5; --new:#25239a; --new-soft:#e6e6fa;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ink:#ececf2; --muted:#a9a9b8; --line:#3b3a48; --paper:#1d1c24;
+    --indigo:#a9a7ff; --purple:#c3a2ff; --pink:#f0a3c8; --peach:#f3c9a4; --navy:#2c3790;
+    --warm:#22211f; --lav:#1f1e2a; --grey:#26252e; --ph:#2a2936; --hatch:#35344a;
+    --note:#3a3214; --note-line:#8a7520; --note-ink:#f3e3a0;
+    --keep:#6fd3a5; --keep-soft:#173a2a; --adapt:#f0c060; --adapt-soft:#3b2f12;
+    --retire:#ff8a80; --retire-soft:#3d1d1a; --new:#c3c1ff; --new-soft:#26264a;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grey);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif}
+.wrap{max-inline-size:1320px;margin-inline:auto;padding:28px 24px 60px}
+h1,h2,h3,h4{line-height:1.15;margin-block:0 .4em}
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.doc-head{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;padding-block-end:14px;margin-block-end:20px;border-block-end:3px solid transparent;border-image:var(--grad) 1}
+.doc-head h1{font-size:26px;color:var(--indigo)}
+.doc-head .meta{font-size:13px;color:var(--muted);text-align:end}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-block-end:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+table{border-collapse:collapse;inline-size:100%;font-size:13px}
+th,td{border-block-end:1px solid var(--line);padding:7px 8px;text-align:start;vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.k{background:var(--keep-soft);color:var(--keep)} .a{background:var(--adapt-soft);color:var(--adapt)}
+.r{background:var(--retire-soft);color:var(--retire)} .n{background:var(--new-soft);color:var(--new)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-block-start:10px}
+ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:4px}
+
+/* Styled wireframe in the site's visual language */
+.row{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;margin-block-end:22px;align-items:start}
+.sec-label{display:flex;gap:10px;align-items:center;margin-block-end:6px;flex-wrap:wrap}
+.num{display:inline-grid;place-items:center;inline-size:26px;block-size:26px;border-radius:50%;background:var(--indigo);color:var(--paper);font-size:12px;font-weight:700}
+.sec-label h3{font-size:15px;margin:0}
+.frame{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+.band{padding:28px 30px}
+.band.warm{background:radial-gradient(circle at 92% 0%,rgba(243,201,164,.45),transparent 40%),var(--warm)}
+.band.lav{background:radial-gradient(circle at 80% 70%,rgba(123,79,196,.14),transparent 45%),var(--lav)}
+.band.white{background:var(--paper)}
+.band.navy{background:var(--navy);color:#fff;text-align:center;padding:10px;font-size:13px;font-weight:600}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:var(--paper);gap:12px;flex-wrap:wrap}
+.logo{display:flex;gap:8px;align-items:center;color:var(--indigo);font-weight:600;font-size:17px}
+.logo i{inline-size:22px;block-size:26px;border-radius:40% 60% 50% 50%;background:linear-gradient(160deg,var(--peach),var(--pink) 40%,var(--purple) 70%,var(--indigo))}
+.selector{border:2px solid var(--indigo);border-radius:999px;padding:5px 14px;font-size:13px;color:var(--muted)}
+.selector b{color:var(--indigo)}
+.gradrule{block-size:3px;background:var(--grad)}
+.tabs{display:flex;gap:22px;padding:12px 24px;font-size:14px;font-weight:500;background:var(--paper);border-block-end:1px solid var(--line);overflow:hidden;white-space:nowrap}
+.tabs span.on{border-block-end:2px solid var(--purple);padding-block-end:3px}
+.display{font-size:44px;font-weight:600;background:linear-gradient(90deg,var(--indigo),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.08}
+.h2{font-size:32px;font-weight:600;color:var(--indigo)}
+.lede{font-size:16px;color:var(--ink);max-inline-size:640px}
+.small{font-size:13px;color:var(--muted)}
+.pill{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;margin:4px 4px 0 0;background:var(--paper)}
+.pill.fill{background:var(--purple);border-color:var(--purple);color:#fff}
+.pill.outline{border-color:var(--purple);color:var(--purple);font-size:11px;padding:2px 9px;font-weight:500}
+.draft{display:inline-block;background:var(--grey);border-radius:6px;font-size:11px;padding:2px 8px;font-weight:600;vertical-align:middle}
+.ph{background:var(--ph);border:1.5px dashed var(--hatch);border-radius:12px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:12px;padding:10px;
+    background-image:repeating-linear-gradient(45deg,transparent 0 10px,var(--hatch) 10px 11px)}
+.ph strong{display:block;color:var(--indigo);font-size:13px}
+.belief{display:grid;grid-template-columns:1fr 1.2fr;gap:20px;padding-block:12px;border-block-end:1px solid var(--line)}
+.belief .t{color:var(--indigo);font-size:19px;font-weight:600}
+.stepper{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-block-start:16px}
+.step{position:relative;padding-inline-end:10px}
+.step .dot{inline-size:26px;block-size:26px;border-radius:50%;background:var(--indigo);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;position:relative;z-index:1}
+.step .dot.o{background:var(--paper);border:2px solid var(--purple);color:var(--purple)}
+.step::before{content:"";position:absolute;inset-block-start:12px;inset-inline:26px 0;block-size:2px;background:var(--grad)}
+.step:last-child::before{display:none}
+.step h4{color:var(--indigo);font-size:19px;margin-block:12px 2px}
+.topgrid > div{border-block-start:1px solid var(--line);padding-block-start:12px}
+.topgrid h4{color:var(--indigo);font-size:19px;font-weight:600;margin-block-end:4px}
+.topgrid p{margin:0;color:var(--muted);font-size:14px}
+.quote{border-inline-start:4px solid var(--indigo);padding-inline-start:18px;margin-block:8px 18px}
+.quote .q{font-size:24px;color:var(--indigo);font-weight:600;line-height:1.25}
+.statement{font-size:24px;color:var(--indigo);font-weight:600;padding-block:12px;border-block-end:1px solid var(--line)}
+.bignum{font-size:38px;color:var(--indigo);font-weight:600;line-height:1}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h4{color:var(--indigo);font-size:16px;margin-block-end:4px}
+.card p{margin:0;font-size:13px;color:var(--muted)}
+.cardtop{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-block-end:6px}
+.btn{display:inline-block;border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;margin:10px 8px 0 0;border:1.5px solid var(--indigo);color:var(--indigo)}
+.btn.p{background:var(--indigo);color:#fff}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.split > .card{padding:20px}
+.footer{background:var(--navy);color:#dfe2ff;padding:18px 24px;font-size:12px}
+
+/* annotations */
+.note{background:var(--note);border:1px solid var(--note-line);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--note-ink)}
+.note h4{font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-block-end:6px}
+.note dl{margin:0} .note dt{font-weight:700;margin-block-start:7px} .note dd{margin:0}
+.decide{border-inline-start:4px solid var(--retire);background:var(--retire-soft);padding:8px 10px;border-radius:4px;margin-block-start:8px;font-size:12.5px;color:var(--ink)}
+.foot{font-size:12px;color:var(--muted);margin-block-start:30px;border-block-start:1px solid var(--line);padding-block-start:12px}
+@media (max-width:960px){
+  .row{grid-template-columns:1fr}
+  .grid2,.grid3,.grid4,.split,.belief{grid-template-columns:1fr}
+  .stepper{grid-template-columns:1fr 1fr}
+  .display{font-size:34px}
+}
+@media print{
+  body{background:#fff;font-size:11px}
+  .wrap{padding:0}
+  .row,.panel{break-inside:avoid}
+  .row{grid-template-columns:minmax(0,1fr) 230px}
+}
+
+/* v0.4 additions */
+.labhdr{display:flex;align-items:center;gap:14px;padding:12px 24px;background:var(--paper);flex-wrap:wrap}
+.ms{display:inline-flex;align-items:center;gap:6px;color:#737373;font-weight:600;font-size:15px}
+.ms i{display:grid;grid-template-columns:repeat(2,7px);gap:1px}
+.ms i b{inline-size:7px;block-size:7px;display:block}
+.ms i b:nth-child(1){background:#f25022}.ms i b:nth-child(2){background:#7fba00}.ms i b:nth-child(3){background:#00a4ef}.ms i b:nth-child(4){background:#ffb900}
+.site{border-inline-start:1.5px solid var(--ink);padding-inline-start:12px;font-weight:600;font-size:15px;color:var(--ink)}
+.links{display:flex;gap:12px;font-size:12px;color:var(--ink);flex-wrap:wrap}
+.blackbtn{margin-inline-start:auto;background:#000;color:#fff;border-radius:3px;padding:4px 10px;font-size:12px}
+.markrow{display:flex;align-items:center;gap:8px}
+.markrow i{inline-size:16px;block-size:19px;border-radius:40% 60% 50% 50%;background:linear-gradient(160deg,var(--peach),var(--pink) 40%,var(--purple) 70%,var(--indigo))}
+.edge{border-block-start:1px solid var(--line);padding-block-start:10px;margin-block-start:12px}
+.path{color:var(--purple);font-weight:600;font-size:14px}
+.journey{display:grid;grid-template-columns:repeat(5,1fr);margin-block-start:12px}
+.journey > div{position:relative;padding-block-start:22px;padding-inline-end:8px}
+.journey > div::before{content:"";position:absolute;inset-block-start:2px;inset-inline-start:0;inline-size:12px;block-size:12px;border-radius:50%;border:2px solid var(--purple);background:var(--paper);z-index:1}
+.journey > div::after{content:"";position:absolute;inset-block-start:8px;inset-inline:14px 0;block-size:2px;background:var(--grad)}
+.journey > div:last-child::after{display:none}
+.journey h4{color:var(--indigo);font-size:15px;margin:0}
+@media (max-width:960px){.journey{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc-head">
+  <div>
+    <div class="eyebrow">Frontier Mindset Lab · January campaign</div>
+    <h1>Landing Page Wireframe v0.4: matched to the working prototype</h1>
+    <div class="small">Worked back from the HTML prototype (<code>landing-prototype/index.html</code>). Records the decisions made while building it. Bracketed copy is placeholder; copy marked <span class="chip a">Changed</span> differs from build brief v1.0 and needs messaging sign-off.</div>
+  </div>
+  <div class="meta">Prepared for William Nations<br>November 24, 2026<br>Supersedes v0.3</div>
+</header>
+
+<section class="grid2">
+  <div class="panel">
+    <div class="eyebrow">What changed since v0.3</div>
+    <ul class="tight">
+      <li><strong>Header.</strong> A Lab version of the standard Microsoft site header: Microsoft logo | "The Frontier Mindset Lab", the section links as menu items, one "Choose your path" button. Sticky. The separate tab row is gone.</li>
+      <li><strong>Hero copy.</strong> New public subhead built on the four mindsets ("adapt instead of freezing…").</li>
+      <li><strong>The moment we're in.</strong> Three fears replace the two beliefs, and a closing paragraph adds an honest "this is real work" edge.</li>
+      <li><strong>Definition.</strong> Body trimmed to two sentences; "The goal is simple…" moved here as a statement line. The spine columns carry the specifics.</li>
+      <li><strong>Choose your path.</strong> Chips removed; their wording became the card headings.</li>
+      <li><strong>Build target.</strong> The reference page (Microsoft cybersecurity events) uses Microsoft's own AEM components, not Core Components. See the handover report.</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <div class="eyebrow">Status key (used on every section)</div>
+    <table>
+      <tr><td><span class="chip k">Keep</span></td><td>Same as v0.3</td></tr>
+      <tr><td><span class="chip a">Changed</span></td><td>Changed since v0.3 (layout or copy)</td></tr>
+      <tr><td><span class="chip n">New</span></td><td>Not in v0.3</td></tr>
+      <tr><td><span class="chip r">Removed</span></td><td>Dropped since v0.3</td></tr>
+    </table>
+    <div class="small" style="margin-block-start:10px">Exact design tokens (from the Narrative Hub stylesheet): indigo #1A2397, purple #8551C7, pink #D25BA4, coral #FB96A4, peach #FCDAB0, warm band #F6F5F1, lavender band #FAF9FC, ink #323130, muted #605E5C, line #E1DFDD. The wireframe itself uses v0.3's approximate palette.</div>
+  </div>
+</section>
+
+<!-- 0 HEADER -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">0</span><h3>Header and campaign bar</h3><span class="chip a">Changed</span></div>
+    <div class="frame">
+      <div class="labhdr">
+        <span class="ms"><i><b></b><b></b><b></b><b></b></i>Microsoft</span>
+        <span class="site">The Frontier Mindset Lab</span>
+        <span class="links"><span>Why now</span><span>The Frontier Mindset</span><span>The mindsets</span><span>For leaders</span><span>For you</span><span>Offerings</span><span>Live premiere</span></span>
+        <span class="blackbtn">Choose your path</span>
+      </div>
+      <div class="gradrule"></div>
+      <div class="band navy">Live premiere · [Date, week of January 18] · Save your seat →</div>
+    </div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Changed</dt><dd>Lab version of the standard Microsoft header (54px bar, 18px site name in dark grey #262626, 13px links, black button). Section links moved in from the old tab row. The whole header is sticky.</dd>
+    <dt>Removed</dt><dd>Lab petal mark in the header (moved to the hero). "Start here" pill selector (now the "Choose your path" button).</dd>
+    <dt>Small screens</dt><dd>Below 1280px the links drop to a second row that scrolls sideways; the button is hidden on phones.</dd></dl>
+    <div class="decide"><strong>Decide:</strong> can the template's universal header carry a Lab site name, section links and one button, and be sticky? Fallback: header plus a separate sticky section nav.</div></aside>
+</div>
+
+<!-- 1 HERO -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">1</span><h3>Hero</h3><span class="chip a">Changed copy</span></div>
+    <div class="frame">
+      <div class="band warm grid2" style="align-items:center">
+        <div>
+          <div class="eyebrow markrow"><i></i>The Frontier Mindset Lab</div>
+          <div class="display">Expanding human capability in the age of AI</div>
+          <p class="lede">AI is changing work, and how people respond matters as much as the tools. The Frontier Mindset is how people adapt instead of freezing, discern instead of trusting blindly, create instead of waiting, and [coach / lead] instead of going it alone. It's built through practice, with leaders shaping the room to practice.</p>
+          <span class="btn p">Save your seat</span><span class="btn">Explore the Frontier Mindset</span>
+        </div>
+        <div class="ph" style="min-block-size:230px"><strong>ASSET-01 · Hero film · Aneesh Raman</strong>60–90 sec · captions required</div>
+      </div>
+      <div class="gradrule"></div>
+    </div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Keep</dt><dd>Warm band with peach glow, gradient H1, video slot, two CTAs, gradient rule below.</dd>
+    <dt>Changed</dt><dd>Subhead is the new public positioning line. Lab petal mark sits beside the eyebrow.</dd>
+    <dt>Component</dt><dd><code>section-master</code> 2-col + <code>block-heading</code> + video player.</dd></dl>
+    <div class="decide"><strong>Decide:</strong> primary CTA (Nov 30); "coach" or "lead" (Taylor). Consider dropping the eyebrow, since the header now names the Lab.</div></aside>
+</div>
+
+<!-- 2 THE MOMENT WE'RE IN -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">2</span><h3>The moment we're in</h3><span class="chip k">Keep layout</span><span class="chip a">Changed copy</span></div>
+    <div class="frame"><div class="band lav">
+      <div class="h2">The moment we're in</div>
+      <p class="lede">AI keeps getting better. The question is whether we will too. Many people feel three fears at once:</p>
+      <div class="belief"><div><div class="eyebrow">Fear</div><div class="t">Using it too little</div></div><div class="small">the worry of falling behind as the tools, and the work, move on.</div></div>
+      <div class="belief"><div><div class="eyebrow">Fear</div><div class="t">Trusting it too much</div></div><div class="small">the worry of handing over judgment that should stay human.</div></div>
+      <div class="belief"><div><div class="eyebrow">Fear</div><div class="t">Being replaced by it</div></div><div class="small">the longer-term worry that there won't be a place for people in the work.</div></div>
+      <div class="statement" style="border:0">Each fear is understandable. None of them has to decide what happens next.</div>
+      <p class="small">People can keep getting better through practice. That's where the human side of AI transformation begins.</p>
+      <p class="small edge">This isn't a promise that AI will work out on its own. Resetting around human potential and ambition is real work. Over the next decade, the systems that prepare people for work, employ them and help them build something new will need to be redesigned. The Lab is one place to start: practical, tested at Microsoft first, and honest about what we're still learning.</p>
+    </div></div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Keep</dt><dd>Lavender band and the two-column rows.</dd>
+    <dt>Changed</dt><dd>Three fear rows replace the two belief rows (Fatalism; fixed mindset). Each fear lines up with a mindset: too little → Adapt, too much → Discern, replaced → Create.</dd>
+    <dt>New</dt><dd>"Edge" paragraph under a thin divider, so the page isn't naive upside.</dd></dl>
+    <div class="decide"><strong>Decide:</strong> Taylor to confirm the fears replace the beliefs from the messaging architecture.</div></aside>
+</div>
+
+<!-- 3 DEFINITION -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">3</span><h3>The Frontier Mindset: definition and spine</h3><span class="chip a">Changed copy</span></div>
+    <div class="frame"><div class="band warm">
+      <div class="h2">What is the Frontier Mindset? <span class="pill outline">Working definition</span></div>
+      <div class="quote"><div class="q">The Frontier Mindset is how we learn, choose and create as AI keeps changing what work can be.</div></div>
+      <p class="lede">It isn't a technical skill or a destination, but a way of working rooted in our human edge: the ability to keep getting better through practice. Anyone can build it, but no one builds it alone.</p>
+      <div class="statement" style="border:0">The goal is simple: more capable people, not simply more capable AI.</div>
+      <div class="grid3 topgrid" style="margin-block-start:10px">
+        <div><div class="eyebrow">01 · How to AI</div><h4>Use AI well</h4><p>Adapt as work changes, and use judgment about where and how AI contributes.</p></div>
+        <div><div class="eyebrow">02 · How to human with AI</div><h4>Reimagine what work can become</h4><p>Look beyond adoption and efficiency toward different work, stronger human contribution and new value.</p></div>
+        <div><div class="eyebrow">03 · Culture</div><h4>Build capability through practice</h4><p>People develop through doing and feedback. Leaders shape the culture, workflows and room to practice.</p></div>
+      </div>
+    </div></div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Keep</dt><dd>Working-definition pill, left-border pull quote, topline-ruled spine grid.</dd>
+    <dt>Changed</dt><dd>Body cut from five sentences to two; the cut sentences repeated the spine columns. "The goal is simple…" moved here from the hero as a large statement line.</dd></dl></aside>
+</div>
+
+<!-- 4 MINDSETS + JOURNEY -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">4</span><h3>The mindsets in practice, plus the customer-zero journey</h3><span class="chip k">Keep</span></div>
+    <div class="frame"><div class="band lav">
+      <div class="h2">The mindsets in practice</div>
+      <p class="small">Four working lenses for what the Frontier Mindset looks like day to day. They're still evolving, and we'll refine them as we learn.</p>
+      <div class="grid4 topgrid" style="margin-block-start:10px">
+        <div><div class="ph" style="block-size:80px;margin-block-end:10px"><strong>ASSET-02</strong></div><h4>Adapt</h4><p>"I'm not fixed. I can learn and shape how I respond to change."</p></div>
+        <div><div class="ph" style="block-size:80px;margin-block-end:10px"><strong>ASSET-03</strong></div><h4>Discern</h4><p>"Fluency isn't truth. I question, weigh it and stay accountable."</p></div>
+        <div><div class="ph" style="block-size:80px;margin-block-end:10px"><strong>ASSET-04</strong></div><h4>Create</h4><p>"I can help shape what comes next."</p></div>
+        <div><div class="ph" style="block-size:80px;margin-block-end:10px"><strong>ASSET-05</strong></div><h4>[Lead / Coach]</h4><p>"My effectiveness includes what others become able to do."</p></div>
+      </div>
+      <div style="margin-block-start:26px">
+        <div class="eyebrow">What we're seeing at Microsoft</div>
+        <div class="h2" style="font-size:22px">From anxiety to creation</div>
+        <div class="journey">
+          <div><h4>Anxiety</h4><div class="small">where much of the AI-and-work conversation starts</div></div>
+          <div><h4>Adaptation</h4><div class="small">adaptation, not simply adoption</div></div>
+          <div><h4>Agency</h4><div class="small">people see they have more choice than they think</div></div>
+          <div><h4>Aspiration</h4><div class="small">people raise their ambition for their work and career</div></div>
+          <div><h4>Creation</h4><div class="small">people create new work</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Keep</dt><dd>4-up mindset grid with clip slots ("What it looks like" line under each). Unnumbered journey with hollow dots joined by the signature gradient; vertical on phones.</dd></dl>
+    <div class="decide"><strong>Decide:</strong> "Lead" or "Coach" (Taylor).</div></aside>
+</div>
+
+<!-- 5 PATHS -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">5</span><h3>Choose your path</h3><span class="chip a">Changed</span></div>
+    <div class="frame"><div class="band white">
+      <div class="h2">Where are you starting from?</div>
+      <div class="split">
+        <div class="card">
+          <div class="path">I lead people or an organization</div>
+          <div class="statement" style="font-size:20px">Develop people <em>and</em> change the conditions around them.</div>
+          <p class="small" style="margin-block-start:10px">What would your people need to do differently, and what would you need to change, for AI to create value beyond saving time?</p>
+          <p class="small"><strong>Try this:</strong> Choose one workflow. Identify where AI can contribute and where human judgment must stay accountable. Then run one useful experiment.</p>
+          <span class="btn p">Send your people the playlist</span><span class="btn">Get the leader plan</span>
+        </div>
+        <div class="card">
+          <div class="path">I want to change how I work</div>
+          <div class="statement" style="font-size:20px">Build it through practice, one task at a time.</div>
+          <p class="small" style="margin-block-start:10px">You don't have to absorb every change at once. The Frontier Mindset grows the way any capability does: try something, get feedback, adjust.</p>
+          <p class="small"><strong>Try this:</strong> Pick one bounded task. Try an unfamiliar approach, check the claims that matter, ask for feedback, and adjust.</p>
+          <span class="btn p">Start the playlist</span><span class="btn">Explore the mindsets</span>
+        </div>
+      </div>
+    </div></div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Removed</dt><dd>The two chips: they only scrolled to the cards directly below.</dd>
+    <dt>Changed</dt><dd>Chip wording became the card headings (purple), replacing "For leaders" / "For you". Arriving from the header's "For leaders" / "For you" links highlights the matching card.</dd></dl>
+    <div class="decide"><strong>Decide:</strong> individual-contributor copy (Taylor review). Playlist URL and leader plan PDF still pending.</div></aside>
+</div>
+
+<!-- 6 OFFERINGS -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">6</span><h3>What the Lab offers</h3><span class="chip k">Keep</span></div>
+    <div class="frame"><div class="band warm">
+      <div class="h2">Start with one thing</div>
+      <p class="small">Wherever you're starting, there's a next step.</p>
+      <div class="grid4" style="margin-block:10px 18px">
+        <div><div class="bignum">1</div><strong>Understand</strong><div class="small">Watch, read and explore</div></div>
+        <div><div class="bignum">2</div><strong>Practice</strong><div class="small">Playlists and practical plans</div></div>
+        <div><div class="bignum">3</div><strong>Activate</strong><div class="small">Bring it to your team or organization</div></div>
+        <div><div class="bignum">4</div><strong>Contribute</strong><div class="small">Take part in pilots and research</div></div>
+      </div>
+      <div class="grid3">
+        <div class="card"><div class="cardtop"><span class="eyebrow">Practice</span><span class="draft">[Available now / Confirm]</span></div><h4>Frontier Mindset playlist</h4><p>Short videos on the mindsets, curated on AI Skills Navigator for leaders and individuals.</p></div>
+        <div class="card"><div class="cardtop"><span class="eyebrow">Practice</span><span class="draft">[Available now / Confirm]</span></div><h4>Leader 30/60/90-day plan</h4><p>A short, practical plan for putting the Frontier Mindset to work with your team.</p></div>
+        <div class="card"><div class="cardtop"><span class="eyebrow">Activate</span><span class="draft">[Available now / Confirm]</span></div><h4>Executive strategy session</h4><p>A strategy conversation plus a hands-on design session, delivered with your Microsoft account team.</p></div>
+        <div class="card"><div class="cardtop"><span class="eyebrow">Practice</span><span class="draft">Coming soon</span></div><h4>Interactive mindset experience</h4><p>[Description TBD]</p></div>
+        <div class="card"><div class="cardtop"><span class="eyebrow">Contribute</span><span class="draft">Coming soon</span></div><h4>Pilots and Lab research</h4><p>Help shape what the Lab learns next.</p></div>
+      </div>
+    </div></div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Keep</dt><dd>Numbered 1–4 ladder (a sequence of actions, not a maturity ladder) and status-tagged offer cards, 3 per row.</dd></dl>
+    <div class="decide"><strong>Decide (Nov 30):</strong> which offerings are real at launch; whether to show the two "Coming soon" cards.</div></aside>
+</div>
+
+<!-- 7 LIVE -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">7</span><h3>Live premiere and media</h3><span class="chip k">Keep</span></div>
+    <div class="frame"><div class="band lav grid2" style="align-items:center">
+      <div class="ph" style="min-block-size:180px"><strong>ASSET-06 · Premiere key art</strong>Replay embed after the event</div>
+      <div>
+        <span class="pill outline">[Date, week of January 18] · LinkedIn Live</span>
+        <div class="h2" style="font-size:26px;margin-block-start:8px">[Premiere title]</div>
+        <p class="small">Join us for the premiere of a conversation on the human side of AI transformation, with live Q&amp;A in the chat. Featuring Aneesh Raman [and guest TBD].</p>
+        <span class="btn p">Save your seat</span><span class="btn">Add to calendar</span>
+        <div class="grid3" style="margin-block-start:14px"><div class="ph" style="block-size:60px"><strong>ASSET-08</strong></div><div class="ph" style="block-size:60px"><strong>ASSET-09</strong></div><div class="ph" style="block-size:60px"><strong>[January blog title]</strong></div></div>
+      </div>
+    </div></div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Keep</dt><dd>Lavender band, key art left, outline date pill, two CTAs, three-up media row (full width on the page).</dd></dl>
+    <div class="decide"><strong>Decide:</strong> date, title and speakers (December). LinkedIn Live URL and .ics pending.</div></aside>
+</div>
+
+<!-- 8 CONNECT -->
+<div class="row">
+  <div>
+    <div class="sec-label"><span class="num">8</span><h3>Microsoft and the Lab, and staying connected</h3><span class="chip k">Keep</span></div>
+    <div class="frame"><div class="band warm grid2">
+      <div>
+        <div class="h2" style="font-size:26px">Microsoft and the Lab</div>
+        <p class="small">We're customer zero. Microsoft is working through the same changes as the organizations we serve, and we test the Lab's practices on ourselves first. This is a working framework: we'll share what we learn and refine it as the evidence grows.</p>
+      </div>
+      <div class="card">
+        <h4>Stay connected to the Lab</h4>
+        <p>New practices, events and ways to take part.</p>
+        <div class="ph" style="block-size:42px;margin-block-start:10px"><strong>Email field + "Notify me" (demo form)</strong></div>
+        <span class="btn">Bring the Lab to your organization</span>
+      </div>
+    </div></div>
+    <div class="footer">Standard Microsoft footer · privacy · terms · trademarks · Global Skilling links</div>
+  </div>
+  <aside class="note"><h4>Design mapping</h4><dl>
+    <dt>Keep</dt><dd>Two columns: credibility text left, sign-up card right.</dd></dl>
+    <div class="decide"><strong>Decide:</strong> follow mechanism (form or "Follow on LinkedIn"); whether the template supports forms.</div></aside>
+</div>
+
+<div class="panel">
+  <div class="eyebrow">Open decisions</div>
+  <table>
+    <tr><th>Decision</th><th>Shown in v0.4 as</th><th>Owner</th></tr>
+    <tr><td>Header: Lab site name, section links, one button, sticky</td><td>As drawn in section 0</td><td>Web team</td></tr>
+    <tr><td>Primary campaign action</td><td>"Save your seat"</td><td>Team + Aneesh, Nov 30</td></tr>
+    <tr><td>"Coach" or "Lead"</td><td>[coach / lead] in the hero; [Lead / Coach] in section 4</td><td>Taylor</td></tr>
+    <tr><td>Three fears replace the two beliefs; new hero, definition and edge copy</td><td>New copy throughout</td><td>Taylor, first week of Dec</td></tr>
+    <tr><td>Offerings live at launch</td><td>Cards 1–3 "[Available now / Confirm]", 4–5 "Coming soon"</td><td>Nov 30 project list</td></tr>
+    <tr><td>Premiere date, title, speakers</td><td>Placeholders</td><td>Phil / Theresa, December</td></tr>
+    <tr><td>Follow mechanism / forms</td><td>Demo email form</td><td>William / web team</td></tr>
+  </table>
+</div>
+
+<div class="foot">Working draft v0.4 · Worked back from the HTML prototype on branch <code>claude/serene-thompson-9m9mv2</code> (folder <code>landing-prototype/</code>); the build report and component mapping are in <code>landing-prototype/HANDOVER.md</code>. Built on v0.3 and build brief v1.0 (Nov 24). Proposed decisions are for team discussion.</div>
+</div>
+</body>
+</html>
