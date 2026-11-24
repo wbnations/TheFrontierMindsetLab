@@ -61,7 +61,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 64px; /* clears the sticky in-page nav */
+  scroll-padding-top: 72px; /* clears the sticky header */
 }
 
 body {
@@ -391,6 +391,9 @@ img {
    (measured from the reference events page: 54px bar, Microsoft logo, 1.5px divider,
    18px semibold site name, black 13px action button). */
 .lab-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background: #fff;
   color: #262626;
   font-family: "Segoe UI Variable Text", "Segoe UI", segoeui, "Helvetica Neue", helvetica, arial, sans-serif;
@@ -439,7 +442,8 @@ img {
   align-items: center;
   gap: 8px;
   height: 54px;
-  color: var(--indigo);
+  padding-right: 16px;
+  color: #262626;
   font-size: 18px;
   font-weight: 600;
   text-decoration: none;
@@ -454,9 +458,47 @@ img {
   background: #262626;
 }
 
-.lab-header__site img {
+.lab-header__nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.lab-header__nav a {
+  display: inline-flex;
+  align-items: center;
+  height: 54px;
+  padding: 1px 6px 0;
+  border-bottom: 2px solid transparent;
+  color: #262626;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.lab-header__nav a:hover {
+  border-bottom-color: #262626;
+}
+
+.lab-header__cta {
+  margin-left: auto;
+}
+
+/* Lab mark beside the hero eyebrow */
+.lab-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lab-mark img {
   width: auto;
-  height: 24px;
+  height: 28px;
+}
+
+.lab-header__nav {
+  margin-right: 12px;
 }
 
 .lab-header__cta {
@@ -489,42 +531,6 @@ img {
 
 .campaign-bar a:hover {
   text-decoration: underline;
-}
-
-/* In-page navigation: sticky, which the reference page's secondary sticky nav supports */
-.inpage-nav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid var(--line);
-  background: rgb(255 255 255 / 96%);
-}
-
-.inpage-nav ul {
-  display: flex;
-  gap: 28px;
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  max-width: calc(var(--wrap) + 2 * var(--gutter));
-  overflow-x: auto;
-  list-style: none;
-  white-space: nowrap;
-  scrollbar-width: thin;
-}
-
-.inpage-nav a {
-  display: inline-block;
-  padding: 16px 0 13px;
-  border-bottom: 3px solid transparent;
-  color: var(--ink-2);
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.inpage-nav a:hover {
-  border-bottom-color: var(--purple);
-  color: var(--indigo);
 }
 
 /* Hero */
@@ -805,6 +811,26 @@ img {
 }
 
 /* 6. Responsive */
+@media (width < 1280px) {
+  html { scroll-padding-top: 116px; }
+  .lab-header__bar { flex-wrap: wrap; height: auto; }
+  .lab-header__cta { margin-left: auto; }
+
+  .lab-header__nav {
+    order: 3;
+    flex-basis: calc(100% + 2 * var(--gutter));
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter);
+    border-top: 1px solid var(--line);
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .lab-header__nav ul { gap: 12px; }
+  .lab-header__nav a { height: 44px; padding: 1px 4px 0; font-size: 14px; }
+  .lab-header__nav li:first-child a { padding-left: 0; }
+}
+
 @media (width < 1024px) {
   :root { --gutter: 32px; }
   .layout--cols-3.offer-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }

@@ -33,7 +33,7 @@ The prototype uses that vocabulary for its structure (`section-master`, `block-h
 
 1. **Which component set does the field template use:** the Reimagine components above, Core Components, or both?
 2. **Can we add custom style variants and colours?** The reference page only uses Microsoft's fixed themes and Microsoft blue buttons. The Lab look depends on: gradient H1 text, the indigo → peach gradient rule, warm/lavender bands with soft glows, indigo pill buttons. If custom colours aren't allowed, which theme is closest?
-3. **Header:** the prototype assumes the Lab gets a **custom header in the style of the standard Microsoft site header**: Microsoft logo | Lab mark + "The Frontier Mindset Lab", and one action ("Choose your path" → `#paths`), with no dropdown menus. Can the universal header be configured this way (site name, small logo, one action button, no menus)? If not, what can it carry?
+3. **Header:** the prototype assumes the Lab gets a **custom header in the style of the standard Microsoft site header**: Microsoft logo | "The Frontier Mindset Lab" in Microsoft dark grey, the seven in-page section links as plain menu items (no dropdowns), and one action ("Choose your path" → `#paths`). It stays pinned to the top while scrolling. Can the universal header be configured this way (site name, anchor links as menu items, one action button, sticky)? If not, the fallback is the brief's original split: header with name and button, plus a separate sticky in-page nav (the `secondary-sticky-nav` seen on the reference page).
 4. **Forms:** does the template support a Form Container (Section 8), or should it be a "Follow on LinkedIn" button?
 5. **Journey row (Section 4B):** is there a component for a horizontal sequence with a connecting line? If not: a 5-column layout of plain block-features (dropping the line) is the fallback.
 6. **Pull quote (Section 3):** is there a quote component? If not, a Text component with a style variant.
@@ -74,10 +74,9 @@ All of these are CSS custom properties at the top of `styles.css`.
 
 | Section | Element | Reimagine (likely) | Core (brief) | Style variant |
 |---|---|---|---|---|
-| **Header** | Microsoft logo, divider, Lab petal mark + "The Frontier Mindset Lab" (links to top), black "Choose your path" button → `#paths` (hidden on phones). No dropdown menus. `rule-gradient` underneath | Universal header (`universalheader`) configured for the Lab (question 3) | Experience Fragment `frml-header` | Measured from the standard header: 54px bar, 18px semibold site name, 13px black button with 3px radius. Site name in indigo; button hover indigo |
+| **Header + in-page nav** | Microsoft logo, divider, "The Frontier Mindset Lab" (links to top), 7 section links (Why now `#why-now` · The Frontier Mindset `#mindset` · The mindsets `#mindsets` · For leaders `#leaders` · For you `#individuals` · Offerings `#offerings` · Live premiere `#live`), black "Choose your path" button → `#paths`. `rule-gradient` underneath. Sticky. Below 1280px the links move to a second row that scrolls sideways; the button is hidden on phones | Universal header (`universalheader`) configured for the Lab (question 3) | Experience Fragment `frml-header` (brief 3.1 and 3.3 combined) | Measured from the standard header: 54px bar, 18px semibold site name in #262626, 13px #262626 menu items, 13px black button with 3px radius (hover indigo) |
 | **Campaign bar** | One-line link to `#live` | `section-master` with dark theme | Container | `band-navy` |
-| **In-page nav** | 7 anchor links, sticky | `secondary-sticky-nav` | Container of text buttons | none (sticky via CSS) |
-| **1 Hero** `#top` | Lab logo mark + eyebrow, H1, subhead, 2 CTAs, video | `section-master` 2-col + `block-heading` + UMP video | Container, Title ×2, Text, Button ×2, Embed | `band-warm`, `eyebrow`, `display-gradient`, `primary-pill`, `secondary-pill`, `rule-gradient` after |
+| **1 Hero** `#top` | Lab petal mark (ASSET-00) beside the eyebrow, H1, subhead, 2 CTAs, video | `section-master` 2-col + `block-heading` + UMP video | Container, Image, Title ×2, Text, Button ×2, Embed | `band-warm`, `eyebrow`, `display-gradient`, `primary-pill`, `secondary-pill`, `rule-gradient` after |
 | **2 Why now** `#why-now` | H2, intro, 2 belief rows, statement, close | `section-master` + `block-heading` + `layout--cols-2` ×2 | Container, Title, Text, Container 2-col ×2 | `band-lavender`, `eyebrow`, `statement` |
 | **3 The Frontier Mindset** `#mindset` | H2 + tag, pull quote, body, 3-col spine | `section-master` + `block-heading` + `layout--cols-3` of `block-feature` | Title, Text ×3, Container 3-col | `band-warm`, `tag-outline`, `pull-quote`, `topline-grid`, `eyebrow` |
 | **4A Mindsets** `#mindsets` | H2, intro, 4 teasers with clip | `layout--cols-4` of `card`/`block-feature` with media | Container 4-col, Teaser ×4 | `band-lavender`, `topline-grid` |
@@ -116,7 +115,7 @@ Every bracketed placeholder from the brief is rendered as written. Buttons whose
 - ASSET-02 to ASSET-05 mindset clips
 - ASSET-06 premiere key art (alt: "[Premiere title] — LinkedIn Live premiere.")
 - ASSET-08, ASSET-09 short clips; blog teaser image
-- ASSET-00 logo: **supplied**, using `assets/brand/lab-logo-web.png` from the prototype. Used in the header beside the site name.
+- ASSET-00 logo: **supplied**, using `assets/brand/lab-logo-web.png` from the prototype. Used beside the hero eyebrow, not in the header.
 
 
 **Demo-only behaviour**
@@ -141,11 +140,11 @@ Every bracketed placeholder from the brief is rendered as written. Buttons whose
 
 ## 6. Deliberate choices to review
 
-- **Header:** a Lab version of the standard Microsoft site header rather than a fully custom bar, so the page feels native to microsoft.com. "Start here: Choose your path" is shortened to a "Choose your path" button in the Microsoft header style. There are no dropdown menus: on a single-scroll page the sticky in-page nav does that job, and the wireframe says to hide menus until the full Lab site exists.
+- **Header:** a Lab version of the standard Microsoft site header rather than a fully custom bar, so the page feels native to microsoft.com. The site name uses Microsoft's dark grey (#262626), not Lab indigo, and the Lab mark lives in the hero instead. The in-page section links (brief 3.3) are the header's menu items, so there's one bar instead of two. "Start here: Choose your path" is shortened to a "Choose your path" button in the Microsoft header style.
 - **Hero eyebrow** still reads "THE FRONTIER MINDSET LAB" (brief copy), even though the header now names the Lab too. Consider dropping one.
 - **Side margins** match the reference page: content starts 64px from the edge on desktop (32px on tablet, 20px on phones).
 
 - The **journey** has no numbers or "1 of 5", per the guardrail. Its stops are hollow circles joined by the signature gradient (vertical on phones).
 - The **offerings ladder** is numbered 1–4, as the brief specifies (it's a sequence of actions, not a maturity ladder).
 - **No path chips.** The brief's two chips only scrolled to the cards directly beneath them, so their wording became the card headings instead (replacing the "For leaders" / "For you" eyebrows). The `chip` style variant is no longer needed. Arriving from the header button or the in-page nav ("For leaders", "For you") still highlights the matching card, with no script.
-- The **in-page nav** is sticky, since the reference page has a native sticky nav component.
+- The **header is sticky** (it carries the section links). The reference page pins its section nav the same way.

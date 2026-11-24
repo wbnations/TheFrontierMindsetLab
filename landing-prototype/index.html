@@ -14,41 +14,36 @@
 </head>
 <body>
 
-<!-- 3.1 Header: custom Lab header in the style of the standard Microsoft site header
-     (Microsoft logo | site name, one action). Assumes the template lets the Lab set
-     its own site name, mark and action, with no dropdown menus for the January page. -->
+<!-- 3.1 Header with in-page navigation: custom Lab header in the style of the standard
+     Microsoft site header (Microsoft logo | site name, menu items, one action).
+     The menu items are the in-page section links from brief 3.3. Sticky, so they stay in reach. -->
 <header class="lab-header" id="top">
   <div class="lab-header__bar">
     <a class="uhf-logo" href="#top" aria-label="Microsoft">
       <span class="ms-squares" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <span aria-hidden="true">Microsoft</span>
     </a>
-    <a class="lab-header__site" href="#top">
-      <img src="../assets/brand/lab-logo-web.png" alt="" width="20" height="24">
-      <span>The Frontier Mindset Lab</span>
-    </a>
+    <a class="lab-header__site" href="#top">The Frontier Mindset Lab</a>
+    <nav class="lab-header__nav" aria-label="On this page">
+      <ul>
+        <li><a href="#why-now">Why now</a></li>
+        <li><a href="#mindset">The Frontier Mindset</a></li>
+        <li><a href="#mindsets">The mindsets</a></li>
+        <li><a href="#leaders">For leaders</a></li>
+        <li><a href="#individuals">For you</a></li>
+        <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#live">Live premiere</a></li>
+      </ul>
+    </nav>
     <a class="lab-header__cta" href="#paths">Choose your path</a>
   </div>
+  <hr class="rule-gradient">
 </header>
-<hr class="rule-gradient">
 
 <!-- 3.2 Campaign bar: Container band-navy -->
 <div class="campaign-bar band-navy">
   <a href="#live">Live premiere · [Date, week of January 18] · Save your seat →</a>
 </div>
-
-<!-- 3.3 In-page navigation -->
-<nav class="inpage-nav" aria-label="On this page">
-  <ul>
-    <li><a href="#why-now">Why now</a></li>
-    <li><a href="#mindset">The Frontier Mindset</a></li>
-    <li><a href="#mindsets">The mindsets</a></li>
-    <li><a href="#leaders">For leaders</a></li>
-    <li><a href="#individuals">For you</a></li>
-    <li><a href="#offerings">Offerings</a></li>
-    <li><a href="#live">Live premiere</a></li>
-  </ul>
-</nav>
 
 <main>
 
@@ -57,7 +52,7 @@
     <div class="container">
       <div class="layout layout--hero">
         <div class="block-heading">
-          <p class="eyebrow">The Frontier Mindset Lab</p>
+          <p class="eyebrow lab-mark"><img src="../assets/brand/lab-logo-web.png" alt="" width="24" height="28">The Frontier Mindset Lab</p>
           <h1 class="display-gradient" id="hero-title">Expanding human capability in the age of AI</h1>
           <p class="lede">Work is changing, not ending. The Frontier Mindset is how we learn, choose and create as AI keeps changing what work can be. The goal is simple: more capable people, not simply more capable AI.</p>
           <div class="button-group">
