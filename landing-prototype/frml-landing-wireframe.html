@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="MSRAI_Label_c3feb43e-95d4-42a1-ae97-85d136991a95_AI_Disclosure" content="Made with AI">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Frontier Mindset Lab – January Landing Page Wireframe v0.4 (matched to prototype)</title>
+<title>Frontier Mindset Lab – January Landing Page Wireframe</title>
 <style>
 :root{
   --ink:#1b1b1f; --muted:#5b5b66; --line:#dcdbe4; --paper:#ffffff;
@@ -122,7 +122,7 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
   .row{grid-template-columns:minmax(0,1fr) 230px}
 }
 
-/* v0.4 additions */
+/* Additions */
 .labhdr{display:flex;align-items:center;gap:14px;padding:12px 24px;background:var(--paper);flex-wrap:wrap}
 .ms{display:inline-flex;align-items:center;gap:6px;color:#737373;font-weight:600;font-size:15px}
 .ms i{display:grid;grid-template-columns:repeat(2,7px);gap:1px}
@@ -142,6 +142,8 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
 .journey > div:last-child::after{display:none}
 .journey h4{color:var(--indigo);font-size:15px;margin:0}
 @media (max-width:960px){.journey{grid-template-columns:1fr 1fr}}
+.row{grid-template-columns:minmax(0,1fr)}
+.wrap{max-inline-size:1100px}
 </style>
 </head>
 <body>
@@ -150,40 +152,16 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
 <header class="doc-head">
   <div>
     <div class="eyebrow">Frontier Mindset Lab · January campaign</div>
-    <h1>Landing Page Wireframe v0.4: matched to the working prototype</h1>
-    <div class="small">Worked back from the HTML prototype (<code>landing-prototype/index.html</code>). Records the decisions made while building it. Bracketed copy is placeholder; copy marked <span class="chip a">Changed</span> differs from build brief v1.0 and needs messaging sign-off.</div>
+    <h1>Landing page wireframe</h1>
   </div>
-  <div class="meta">Prepared for William Nations<br>November 24, 2026<br>Supersedes v0.3</div>
 </header>
 
-<section class="grid2">
-  <div class="panel">
-    <div class="eyebrow">What changed since v0.3</div>
-    <ul class="tight">
-      <li><strong>Header.</strong> A Lab version of the standard Microsoft site header: Microsoft logo | "The Frontier Mindset Lab", the section links as menu items, one "Choose your path" button. Sticky. The separate tab row is gone.</li>
-      <li><strong>Hero copy.</strong> New public subhead built on the four mindsets ("adapt instead of freezing…").</li>
-      <li><strong>The moment we're in.</strong> Three fears replace the two beliefs, and a closing paragraph adds an honest "this is real work" edge.</li>
-      <li><strong>Definition.</strong> Body trimmed to two sentences; "The goal is simple…" moved here as a statement line. The spine columns carry the specifics.</li>
-      <li><strong>Choose your path.</strong> Chips removed; their wording became the card headings.</li>
-      <li><strong>Build target.</strong> The reference page (Microsoft cybersecurity events) uses Microsoft's own AEM components, not Core Components. See the handover report.</li>
-    </ul>
-  </div>
-  <div class="panel">
-    <div class="eyebrow">Status key (used on every section)</div>
-    <table>
-      <tr><td><span class="chip k">Keep</span></td><td>Same as v0.3</td></tr>
-      <tr><td><span class="chip a">Changed</span></td><td>Changed since v0.3 (layout or copy)</td></tr>
-      <tr><td><span class="chip n">New</span></td><td>Not in v0.3</td></tr>
-      <tr><td><span class="chip r">Removed</span></td><td>Dropped since v0.3</td></tr>
-    </table>
-    <div class="small" style="margin-block-start:10px">Exact design tokens (from the Narrative Hub stylesheet): indigo #1A2397, purple #8551C7, pink #D25BA4, coral #FB96A4, peach #FCDAB0, warm band #F6F5F1, lavender band #FAF9FC, ink #323130, muted #605E5C, line #E1DFDD. The wireframe itself uses v0.3's approximate palette.</div>
-  </div>
-</section>
+
 
 <!-- 0 HEADER -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">0</span><h3>Header and campaign bar</h3><span class="chip a">Changed</span></div>
+    <div class="sec-label"><span class="num">0</span><h3>Header and campaign bar</h3></div>
     <div class="frame">
       <div class="labhdr">
         <span class="ms"><i><b></b><b></b><b></b><b></b></i>Microsoft</span>
@@ -195,17 +173,12 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
       <div class="band navy">Live premiere · [Date, week of January 18] · Save your seat →</div>
     </div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Changed</dt><dd>Lab version of the standard Microsoft header (54px bar, 18px site name in dark grey #262626, 13px links, black button). Section links moved in from the old tab row. The whole header is sticky.</dd>
-    <dt>Removed</dt><dd>Lab petal mark in the header (moved to the hero). "Start here" pill selector (now the "Choose your path" button).</dd>
-    <dt>Small screens</dt><dd>Below 1280px the links drop to a second row that scrolls sideways; the button is hidden on phones.</dd></dl>
-    <div class="decide"><strong>Decide:</strong> can the template's universal header carry a Lab site name, section links and one button, and be sticky? Fallback: header plus a separate sticky section nav.</div></aside>
 </div>
 
 <!-- 1 HERO -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">1</span><h3>Hero</h3><span class="chip a">Changed copy</span></div>
+    <div class="sec-label"><span class="num">1</span><h3>Hero</h3></div>
     <div class="frame">
       <div class="band warm grid2" style="align-items:center">
         <div>
@@ -219,17 +192,12 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
       <div class="gradrule"></div>
     </div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Keep</dt><dd>Warm band with peach glow, gradient H1, video slot, two CTAs, gradient rule below.</dd>
-    <dt>Changed</dt><dd>Subhead is the new public positioning line. Lab petal mark sits beside the eyebrow.</dd>
-    <dt>Component</dt><dd><code>section-master</code> 2-col + <code>block-heading</code> + video player.</dd></dl>
-    <div class="decide"><strong>Decide:</strong> primary CTA (Nov 30); "coach" or "lead" (Taylor). Consider dropping the eyebrow, since the header now names the Lab.</div></aside>
 </div>
 
 <!-- 2 THE MOMENT WE'RE IN -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">2</span><h3>The moment we're in</h3><span class="chip k">Keep layout</span><span class="chip a">Changed copy</span></div>
+    <div class="sec-label"><span class="num">2</span><h3>The moment we're in</h3></div>
     <div class="frame"><div class="band lav">
       <div class="h2">The moment we're in</div>
       <p class="lede">AI keeps getting better. The question is whether we will too. Many people feel three fears at once:</p>
@@ -241,17 +209,12 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
       <p class="small edge">This isn't a promise that AI will work out on its own. Resetting around human potential and ambition is real work. Over the next decade, the systems that prepare people for work, employ them and help them build something new will need to be redesigned. The Lab is one place to start: practical, tested at Microsoft first, and honest about what we're still learning.</p>
     </div></div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Keep</dt><dd>Lavender band and the two-column rows.</dd>
-    <dt>Changed</dt><dd>Three fear rows replace the two belief rows (Fatalism; fixed mindset). Each fear lines up with a mindset: too little → Adapt, too much → Discern, replaced → Create.</dd>
-    <dt>New</dt><dd>"Edge" paragraph under a thin divider, so the page isn't naive upside.</dd></dl>
-    <div class="decide"><strong>Decide:</strong> Taylor to confirm the fears replace the beliefs from the messaging architecture.</div></aside>
 </div>
 
 <!-- 3 DEFINITION -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">3</span><h3>The Frontier Mindset: definition and spine</h3><span class="chip a">Changed copy</span></div>
+    <div class="sec-label"><span class="num">3</span><h3>The Frontier Mindset: definition and spine</h3></div>
     <div class="frame"><div class="band warm">
       <div class="h2">What is the Frontier Mindset? <span class="pill outline">Working definition</span></div>
       <div class="quote"><div class="q">The Frontier Mindset is how we learn, choose and create as AI keeps changing what work can be.</div></div>
@@ -264,15 +227,12 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
       </div>
     </div></div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Keep</dt><dd>Working-definition pill, left-border pull quote, topline-ruled spine grid.</dd>
-    <dt>Changed</dt><dd>Body cut from five sentences to two; the cut sentences repeated the spine columns. "The goal is simple…" moved here from the hero as a large statement line.</dd></dl></aside>
 </div>
 
 <!-- 4 MINDSETS + JOURNEY -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">4</span><h3>The mindsets in practice, plus the customer-zero journey</h3><span class="chip k">Keep</span></div>
+    <div class="sec-label"><span class="num">4</span><h3>The mindsets in practice, plus the customer-zero journey</h3></div>
     <div class="frame"><div class="band lav">
       <div class="h2">The mindsets in practice</div>
       <p class="small">Four working lenses for what the Frontier Mindset looks like day to day. They're still evolving, and we'll refine them as we learn.</p>
@@ -295,15 +255,12 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
       </div>
     </div></div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Keep</dt><dd>4-up mindset grid with clip slots ("What it looks like" line under each). Unnumbered journey with hollow dots joined by the signature gradient; vertical on phones.</dd></dl>
-    <div class="decide"><strong>Decide:</strong> "Lead" or "Coach" (Taylor).</div></aside>
 </div>
 
 <!-- 5 PATHS -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">5</span><h3>Choose your path</h3><span class="chip a">Changed</span></div>
+    <div class="sec-label"><span class="num">5</span><h3>Choose your path</h3></div>
     <div class="frame"><div class="band white">
       <div class="h2">Where are you starting from?</div>
       <div class="split">
@@ -324,16 +281,12 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
       </div>
     </div></div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Removed</dt><dd>The two chips: they only scrolled to the cards directly below.</dd>
-    <dt>Changed</dt><dd>Chip wording became the card headings (purple), replacing "For leaders" / "For you". Arriving from the header's "For leaders" / "For you" links highlights the matching card.</dd></dl>
-    <div class="decide"><strong>Decide:</strong> individual-contributor copy (Taylor review). Playlist URL and leader plan PDF still pending.</div></aside>
 </div>
 
 <!-- 6 OFFERINGS -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">6</span><h3>What the Lab offers</h3><span class="chip k">Keep</span></div>
+    <div class="sec-label"><span class="num">6</span><h3>What the Lab offers</h3></div>
     <div class="frame"><div class="band warm">
       <div class="h2">Start with one thing</div>
       <p class="small">Wherever you're starting, there's a next step.</p>
@@ -352,15 +305,12 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
       </div>
     </div></div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Keep</dt><dd>Numbered 1–4 ladder (a sequence of actions, not a maturity ladder) and status-tagged offer cards, 3 per row.</dd></dl>
-    <div class="decide"><strong>Decide (Nov 30):</strong> which offerings are real at launch; whether to show the two "Coming soon" cards.</div></aside>
 </div>
 
 <!-- 7 LIVE -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">7</span><h3>Live premiere and media</h3><span class="chip k">Keep</span></div>
+    <div class="sec-label"><span class="num">7</span><h3>Live premiere and media</h3></div>
     <div class="frame"><div class="band lav grid2" style="align-items:center">
       <div class="ph" style="min-block-size:180px"><strong>ASSET-06 · Premiere key art</strong>Replay embed after the event</div>
       <div>
@@ -372,15 +322,12 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
       </div>
     </div></div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Keep</dt><dd>Lavender band, key art left, outline date pill, two CTAs, three-up media row (full width on the page).</dd></dl>
-    <div class="decide"><strong>Decide:</strong> date, title and speakers (December). LinkedIn Live URL and .ics pending.</div></aside>
 </div>
 
 <!-- 8 CONNECT -->
 <div class="row">
   <div>
-    <div class="sec-label"><span class="num">8</span><h3>Microsoft and the Lab, and staying connected</h3><span class="chip k">Keep</span></div>
+    <div class="sec-label"><span class="num">8</span><h3>Microsoft and the Lab, and staying connected</h3></div>
     <div class="frame"><div class="band warm grid2">
       <div>
         <div class="h2" style="font-size:26px">Microsoft and the Lab</div>
@@ -395,26 +342,8 @@ ul.tight{margin:6px 0 0;padding-inline-start:18px} ul.tight li{margin-block-end:
     </div></div>
     <div class="footer">Standard Microsoft footer · privacy · terms · trademarks · Global Skilling links</div>
   </div>
-  <aside class="note"><h4>Design mapping</h4><dl>
-    <dt>Keep</dt><dd>Two columns: credibility text left, sign-up card right.</dd></dl>
-    <div class="decide"><strong>Decide:</strong> follow mechanism (form or "Follow on LinkedIn"); whether the template supports forms.</div></aside>
 </div>
 
-<div class="panel">
-  <div class="eyebrow">Open decisions</div>
-  <table>
-    <tr><th>Decision</th><th>Shown in v0.4 as</th><th>Owner</th></tr>
-    <tr><td>Header: Lab site name, section links, one button, sticky</td><td>As drawn in section 0</td><td>Web team</td></tr>
-    <tr><td>Primary campaign action</td><td>"Save your seat"</td><td>Team + Aneesh, Nov 30</td></tr>
-    <tr><td>"Coach" or "Lead"</td><td>[coach / lead] in the hero; [Lead / Coach] in section 4</td><td>Taylor</td></tr>
-    <tr><td>Three fears replace the two beliefs; new hero, definition and edge copy</td><td>New copy throughout</td><td>Taylor, first week of Dec</td></tr>
-    <tr><td>Offerings live at launch</td><td>Cards 1–3 "[Available now / Confirm]", 4–5 "Coming soon"</td><td>Nov 30 project list</td></tr>
-    <tr><td>Premiere date, title, speakers</td><td>Placeholders</td><td>Phil / Theresa, December</td></tr>
-    <tr><td>Follow mechanism / forms</td><td>Demo email form</td><td>William / web team</td></tr>
-  </table>
-</div>
-
-<div class="foot">Working draft v0.4 · Worked back from the HTML prototype on branch <code>claude/serene-thompson-9m9mv2</code> (folder <code>landing-prototype/</code>); the build report and component mapping are in <code>landing-prototype/HANDOVER.md</code>. Built on v0.3 and build brief v1.0 (Nov 24). Proposed decisions are for team discussion.</div>
 </div>
 </body>
 </html>
