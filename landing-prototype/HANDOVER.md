@@ -48,7 +48,7 @@ The brief's hex values were approximated from screenshots. These are the exact v
 | Token | Brief approx. | **Exact** | Use |
 |---|---|---|---|
 | `--indigo` | #25239A | **#1A2397** | Headings, primary buttons, numerals, links |
-| `--purple` | #7B4FC4 | **#8551C7** | Tag outlines, chip hover/selected, focus ring |
+| `--purple` | #7B4FC4 | **#8551C7** | Tag outlines, path headings, focus ring |
 | `--pink` | #D06C9F | **#D25BA4** | Gradient midpoint |
 | (coral) | n/a | **#FB96A4** | Gradient, between pink and peach |
 | `--peach` | #F3C9A4 | **#FCDAB0** | Gradient end, warm glow |
@@ -82,7 +82,7 @@ All of these are CSS custom properties at the top of `styles.css`.
 | **3 The Frontier Mindset** `#mindset` | H2 + tag, pull quote, body, 3-col spine | `section-master` + `block-heading` + `layout--cols-3` of `block-feature` | Title, Text ×3, Container 3-col | `band-warm`, `tag-outline`, `pull-quote`, `topline-grid`, `eyebrow` |
 | **4A Mindsets** `#mindsets` | H2, intro, 4 teasers with clip | `layout--cols-4` of `card`/`block-feature` with media | Container 4-col, Teaser ×4 | `band-lavender`, `topline-grid` |
 | **4B Journey** | Eyebrow, H3, intro, 5 unnumbered stops | `layout` 5-col of `block-feature` (question 5) | Container 5-col, Title + Text ×5 | `eyebrow`, `rule-gradient` connector |
-| **5 Paths** `#paths` | H2, 2 chips, 2 cards (`#leaders`, `#individuals`) | `layout--cols-2` of `card` + `action` | Button ×2, Container 2-col, card Containers | `band-white`, `chip`, `card`, `statement`, `primary-pill`, `secondary-pill` |
+| **5 Paths** `#paths` | H2, 2 cards (`#leaders`, `#individuals`), each headed by its path: "I lead people or an organization" / "I want to change how I work" | `layout--cols-2` of `card` + `action` | Title, Container 2-col, card Containers | `band-white`, `card`, `statement`, `primary-pill`, `secondary-pill`. Path heading: H3, purple, 17px semibold |
 | **6 Offerings** `#offerings` | H2, intro, 4-step ladder, 5 offer cards | `layout--cols-4` + `card-grid` with tags | Container 4-col, Teaser ×5 | `band-warm`, `card`, `tag`, `secondary-pill` |
 | **7 Live** `#live` | Key art, tag, H2, body, 2 CTAs, media row | `section-master` 2-col + `card-grid` | Image/Embed, Text, Title, Button ×2, Container 3-col, Teaser ×3 | `band-lavender`, `tag-outline`, `primary-pill`, `secondary-pill` |
 | **8 Connect** `#connect` | H2 + text; card with H3, text, email form, CTA | `section-master` 2-col + `card` (form: question 4) | Container 2-col, Title, Text, Form Container, Button | `band-warm`, `card`, `primary-pill`, `secondary-pill` |
@@ -147,5 +147,5 @@ Every bracketed placeholder from the brief is rendered as written. Buttons whose
 
 - The **journey** has no numbers or "1 of 5", per the guardrail. Its stops are hollow circles joined by the signature gradient (vertical on phones).
 - The **offerings ladder** is numbered 1–4, as the brief specifies (it's a sequence of actions, not a maturity ladder).
-- **Choosing a path** highlights the matching card (via the `#leaders` / `#individuals` anchor), with no script.
+- **No path chips.** The brief's two chips only scrolled to the cards directly beneath them, so their wording became the card headings instead (replacing the "For leaders" / "For you" eyebrows). The `chip` style variant is no longer needed. Arriving from the header button or the in-page nav ("For leaders", "For you") still highlights the matching card, with no script.
 - The **in-page nav** is sticky, since the reference page has a native sticky nav component.

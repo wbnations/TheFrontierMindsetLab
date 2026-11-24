@@ -653,11 +653,12 @@ img {
 }
 
 /* Choose your path */
-.chooser {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: -8px 0 40px;
+/* Card heading answers "Where are you starting from?" */
+.path-title {
+  color: var(--purple);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .paths .card {
