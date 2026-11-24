@@ -48,7 +48,7 @@
   --size-eyebrow: 12px;
 
   --wrap: 1280px;
-  --gutter: 32px;
+  --gutter: 64px;
   --section-pad: 96px;
 }
 
@@ -127,7 +127,7 @@ img {
 }
 
 .container {
-  max-width: var(--wrap);
+  max-width: calc(var(--wrap) + 2 * var(--gutter));
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -387,37 +387,129 @@ img {
 
 /* 5. Page-specific arrangements */
 
-/* Global header (Experience Fragment frml-header) */
-.site-header .container {
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: 65px;
+/* Header: stand-in for the template's standard Microsoft site header.
+   Measured from the reference page: 54px tall, logo | site name, 13px menu items,
+   black "Search all events" button. The AEM template supplies the real header,
+   so none of this is built. */
+.uhf-standin {
+  background: #fff;
+  color: #262626;
+  font-family: "Segoe UI Variable Text", "Segoe UI", segoeui, "Helvetica Neue", helvetica, arial, sans-serif;
 }
 
-.brand {
+.uhf-bar {
+  display: flex;
+  align-items: center;
+  max-width: 1600px;
+  height: 54px;
+  margin: 0 auto;
+  padding: 0 64px 0 79px;
+}
+
+.uhf-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: var(--indigo);
-  font-size: 18px;
+  gap: 7px;
+  height: 54px;
+  padding-right: 14px;
+  color: #737373;
+  font-size: 20.5px;
   font-weight: 600;
+  letter-spacing: -0.02em;
   text-decoration: none;
 }
 
-.brand img {
-  width: auto;
-  height: 30px;
+.ms-squares {
+  display: grid;
+  grid-template-columns: repeat(2, 10px);
+  gap: 1px;
 }
 
-.site-header .btn {
-  min-height: 44px;
-  padding: 6px 16px;
-  font-size: 14px;
+.ms-squares i {
+  width: 10px;
+  height: 10px;
+}
+
+.ms-squares i:nth-child(1) { background: #f25022; }
+.ms-squares i:nth-child(2) { background: #7fba00; }
+.ms-squares i:nth-child(3) { background: #00a4ef; }
+.ms-squares i:nth-child(4) { background: #ffb900; }
+
+.uhf-site {
+  display: inline-flex;
+  align-items: center;
+  height: 54px;
+  padding: 0 6px 0 0;
+  color: #262626;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.uhf-site::before {
+  content: "";
+  width: 1.5px;
+  height: 26px;
+  margin-right: 12px;
+  background: #262626;
+}
+
+.uhf-nav ul {
+  display: flex;
+  gap: 5px;
+  margin: 0 0 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.uhf-nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 54px;
+  padding: 1px 8px;
+  border: 0;
+  background: none;
+  color: #262626;
+  font: inherit;
+  font-size: 13px;
+  cursor: default;
+}
+
+.uhf-nav button::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-top: -3px;
+  border-right: 1px solid currentcolor;
+  border-bottom: 1px solid currentcolor;
+  transform: rotate(45deg);
+}
+
+.uhf-cta {
+  margin-left: auto;
+  padding: 6px 8px 5px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Lab mark next to the hero eyebrow (replaces the Lab header) */
+.lab-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lab-mark img {
+  width: auto;
+  height: 28px;
 }
 
 /* Campaign bar */
@@ -448,7 +540,7 @@ img {
   gap: 28px;
   margin: 0 auto;
   padding: 0 var(--gutter);
-  max-width: var(--wrap);
+  max-width: calc(var(--wrap) + 2 * var(--gutter));
   overflow-x: auto;
   list-style: none;
   white-space: nowrap;
@@ -748,6 +840,10 @@ img {
 
 /* 6. Responsive */
 @media (width < 1024px) {
+  :root { --gutter: 32px; }
+  .uhf-nav,
+  .uhf-cta { display: none; }
+  .uhf-bar { padding: 0 var(--gutter); }
   .layout--cols-3.offer-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .layout--cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .layout--cols-5 { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 32px; }
@@ -763,6 +859,10 @@ img {
     --gutter: 20px;
     --section-pad: 56px;
   }
+
+  .uhf-logo { font-size: 19px; padding-right: 8px; }
+  .uhf-site { font-size: 16px; padding-left: 4px; }
+  .uhf-site::before { margin-right: 12px; }
 
   .layout--cols-2,
   .layout--cols-3,
@@ -809,10 +909,6 @@ img {
 
   .journey-stop:last-child::after {
     display: none;
-  }
-
-  .brand span {
-    font-size: 16px;
   }
 
   .paths .card,

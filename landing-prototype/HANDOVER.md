@@ -33,7 +33,7 @@ The prototype uses that vocabulary for its structure (`section-master`, `block-h
 
 1. **Which component set does the field template use:** the Reimagine components above, Core Components, or both?
 2. **Can we add custom style variants and colours?** The reference page only uses Microsoft's fixed themes and Microsoft blue buttons. The Lab look depends on: gradient H1 text, the indigo → peach gradient rule, warm/lavender bands with soft glows, indigo pill buttons. If custom colours aren't allowed, which theme is closest?
-3. **Header:** can the page carry a Lab header (logo + "Start here" button), or must it use the standard Microsoft header with the Lab brand in the hero?
+3. **Header:** the prototype now assumes the page uses the template's **standard Microsoft site header**, as the reference page does. Which header (site name and menus) will this page get? The prototype shows the events header as a stand-in.
 4. **Forms:** does the template support a Form Container (Section 8), or should it be a "Follow on LinkedIn" button?
 5. **Journey row (Section 4B):** is there a component for a horizontal sequence with a connecting line? If not: a 5-column layout of plain block-features (dropping the line) is the fallback.
 6. **Pull quote (Section 3):** is there a quote component? If not, a Text component with a style variant.
@@ -62,7 +62,7 @@ The brief's hex values were approximated from screenshots. These are the exact v
 - Signature gradient: `linear-gradient(90deg, #1A2397, #8551C7 38%, #D25BA4 68%, #FB96A4 88%, #FCDAB0)`
 - Display gradient (H1 only): `linear-gradient(90deg, #1A2397 25%, #8551C7)`; falls back to solid indigo.
 - Type: Segoe UI stack. H1 56/36px, H2 40/30px, H3 20px, statement 28/22px, body 17/16px, line-height 1.55, eyebrow 12px uppercase 0.12em.
-- Layout: max width 1280px, section padding 96px desktop / 56px mobile, grids collapse to one column below 768px (4-up goes to 2-up below 1024px).
+- Layout: max content width 1280px, side margins 64/32/20px (desktop/tablet/phone), section padding 96px desktop / 56px mobile, grids collapse to one column below 768px (4-up goes to 2-up below 1024px).
 
 All of these are CSS custom properties at the top of `styles.css`.
 
@@ -74,10 +74,10 @@ All of these are CSS custom properties at the top of `styles.css`.
 
 | Section | Element | Reimagine (likely) | Core (brief) | Style variant |
 |---|---|---|---|---|
-| **Header** | Logo + wordmark, "Start here: Choose your path" | Universal header, or Lab brand in hero (question 3) | Experience Fragment `frml-header` | `secondary-pill`, `rule-gradient` below |
+| **Header** | Standard Microsoft site header. **Stand-in only**: copies the reference page's header (Microsoft logo, "Microsoft events", 4 menus, "Search all events"); its menus do nothing | Universal header (`universalheader`), supplied by the template | Experience Fragment (template default) | none. Not built: the template supplies it |
 | **Campaign bar** | One-line link to `#live` | `section-master` with dark theme | Container | `band-navy` |
 | **In-page nav** | 7 anchor links, sticky | `secondary-sticky-nav` | Container of text buttons | none (sticky via CSS) |
-| **1 Hero** `#top` | Eyebrow, H1, subhead, 2 CTAs, video | `section-master` 2-col + `block-heading` + UMP video | Container, Title ×2, Text, Button ×2, Embed | `band-warm`, `eyebrow`, `display-gradient`, `primary-pill`, `secondary-pill`, `rule-gradient` after |
+| **1 Hero** `#top` | Lab logo mark + eyebrow, H1, subhead, 2 CTAs, video | `section-master` 2-col + `block-heading` + UMP video | Container, Title ×2, Text, Button ×2, Embed | `band-warm`, `eyebrow`, `display-gradient`, `primary-pill`, `secondary-pill`, `rule-gradient` after |
 | **2 Why now** `#why-now` | H2, intro, 2 belief rows, statement, close | `section-master` + `block-heading` + `layout--cols-2` ×2 | Container, Title, Text, Container 2-col ×2 | `band-lavender`, `eyebrow`, `statement` |
 | **3 The Frontier Mindset** `#mindset` | H2 + tag, pull quote, body, 3-col spine | `section-master` + `block-heading` + `layout--cols-3` of `block-feature` | Title, Text ×3, Container 3-col | `band-warm`, `tag-outline`, `pull-quote`, `topline-grid`, `eyebrow` |
 | **4A Mindsets** `#mindsets` | H2, intro, 4 teasers with clip | `layout--cols-4` of `card`/`block-feature` with media | Container 4-col, Teaser ×4 | `band-lavender`, `topline-grid` |
@@ -116,7 +116,10 @@ Every bracketed placeholder from the brief is rendered as written. Buttons whose
 - ASSET-02 to ASSET-05 mindset clips
 - ASSET-06 premiere key art (alt: "[Premiere title] — LinkedIn Live premiere.")
 - ASSET-08, ASSET-09 short clips; blog teaser image
-- ASSET-00 logo: **supplied**, using `assets/brand/lab-logo-web.png` from the prototype
+- ASSET-00 logo: **supplied**, using `assets/brand/lab-logo-web.png` from the prototype. It now sits beside the hero eyebrow, since the Lab header was replaced by the standard Microsoft header.
+
+**Stand-ins (not to be built)**
+- The site header copies the reference page's standard Microsoft header so reviewers see the page in context. Its menus and "Search all events" button do nothing.
 
 **Demo-only behaviour**
 - The "Notify me" form sends nothing: the email field has no name and the form only jumps back to `#connect`.
@@ -139,6 +142,9 @@ Every bracketed placeholder from the brief is rendered as written. Buttons whose
 | `noindex, nofollow` | Pass |
 
 ## 6. Deliberate choices to review
+
+- **Header:** "Start here: Choose your path" and the Lab header were dropped in favour of the standard Microsoft header. The paths are still reachable from the in-page nav ("For leaders", "For you") and the hero CTAs.
+- **Side margins** match the reference page: content starts 64px from the edge on desktop (32px on tablet, 20px on phones).
 
 - The **journey** has no numbers or "1 of 5", per the guardrail. Its stops are hollow circles joined by the signature gradient (vertical on phones).
 - The **offerings ladder** is numbered 1–4, as the brief specifies (it's a sequence of actions, not a maturity ladder).

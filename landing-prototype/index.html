@@ -14,17 +14,27 @@
 </head>
 <body>
 
-<!-- 3.1 Header: Experience Fragment "frml-header" -->
-<header class="site-header" id="top">
-  <div class="container">
-    <a class="brand" href="#top">
-      <img src="../assets/brand/lab-logo-web.png" alt="" width="26" height="30">
-      <span>The Frontier Mindset Lab</span>
+<!-- 3.1 Header: STAND-IN for the template's standard Microsoft site header.
+     The AEM template supplies the real header (universal header component);
+     the menus and button here do nothing. -->
+<header class="uhf-standin" id="top">
+  <div class="uhf-bar">
+    <a class="uhf-logo" href="#top" aria-label="Microsoft">
+      <span class="ms-squares" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span aria-hidden="true">Microsoft</span>
     </a>
-    <a class="btn secondary-pill" href="#paths">Start here: Choose your path</a>
+    <a class="uhf-site" href="#top">Microsoft events</a>
+    <nav class="uhf-nav" aria-label="Site (stand-in)">
+      <ul>
+        <li><button type="button">Signature events</button></li>
+        <li><button type="button">Global events</button></li>
+        <li><button type="button">Browse catalog</button></li>
+        <li><button type="button">Resources</button></li>
+      </ul>
+    </nav>
+    <a class="uhf-cta" href="#">Search all events</a>
   </div>
 </header>
-<hr class="rule-gradient">
 
 <!-- 3.2 Campaign bar: Container band-navy -->
 <div class="campaign-bar band-navy">
@@ -51,7 +61,7 @@
     <div class="container">
       <div class="layout layout--hero">
         <div class="block-heading">
-          <p class="eyebrow">The Frontier Mindset Lab</p>
+          <p class="eyebrow lab-mark"><img src="../assets/brand/lab-logo-web.png" alt="" width="24" height="28">The Frontier Mindset Lab</p>
           <h1 class="display-gradient" id="hero-title">Expanding human capability in the age of AI</h1>
           <p class="lede">Work is changing, not ending. The Frontier Mindset is how we learn, choose and create as AI keeps changing what work can be. The goal is simple: more capable people, not simply more capable AI.</p>
           <div class="button-group">
