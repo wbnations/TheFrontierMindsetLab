@@ -570,6 +570,17 @@ img {
   margin-bottom: 16px;
 }
 
+.why-now .edge {
+  max-width: 46em;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.why-now > .container > p:not(.statement) {
+  max-width: 46em;
+}
+
 /* The Frontier Mindset: definition */
 .definition .pull-quote {
   max-width: 34em;
@@ -579,6 +590,10 @@ img {
 .definition .body-copy {
   max-width: 46em;
   margin-bottom: 48px;
+}
+
+.definition .body-copy .statement {
+  margin-top: 24px;
 }
 
 .title-with-tag {

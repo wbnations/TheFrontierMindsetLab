@@ -77,7 +77,7 @@ All of these are CSS custom properties at the top of `styles.css`.
 | **Header + in-page nav** | Microsoft logo, divider, "The Frontier Mindset Lab" (links to top), 7 section links (Why now `#why-now` · The Frontier Mindset `#mindset` · The mindsets `#mindsets` · For leaders `#leaders` · For you `#individuals` · Offerings `#offerings` · Live premiere `#live`), black "Choose your path" button → `#paths`. `rule-gradient` underneath. Sticky. Below 1280px the links move to a second row that scrolls sideways; the button is hidden on phones | Universal header (`universalheader`) configured for the Lab (question 3) | Experience Fragment `frml-header` (brief 3.1 and 3.3 combined) | Measured from the standard header: 54px bar, 18px semibold site name in #262626, 13px #262626 menu items, 13px black button with 3px radius (hover indigo) |
 | **Campaign bar** | One-line link to `#live` | `section-master` with dark theme | Container | `band-navy` |
 | **1 Hero** `#top` | Lab petal mark (ASSET-00) beside the eyebrow, H1, subhead, 2 CTAs, video | `section-master` 2-col + `block-heading` + UMP video | Container, Image, Title ×2, Text, Button ×2, Embed | `band-warm`, `eyebrow`, `display-gradient`, `primary-pill`, `secondary-pill`, `rule-gradient` after |
-| **2 Why now** `#why-now` | H2, intro, 2 belief rows, statement, close | `section-master` + `block-heading` + `layout--cols-2` ×2 | Container, Title, Text, Container 2-col ×2 | `band-lavender`, `eyebrow`, `statement` |
+| **2 Why now** `#why-now` | H2, intro, 3 fear rows, statement, close, "edge" paragraph | `section-master` + `block-heading` + `layout--cols-2` ×3 | Container, Title, Text, Container 2-col ×3, Text | `band-lavender`, `eyebrow`, `statement`; edge paragraph has a 1px top divider |
 | **3 The Frontier Mindset** `#mindset` | H2 + tag, pull quote, body, 3-col spine | `section-master` + `block-heading` + `layout--cols-3` of `block-feature` | Title, Text ×3, Container 3-col | `band-warm`, `tag-outline`, `pull-quote`, `topline-grid`, `eyebrow` |
 | **4A Mindsets** `#mindsets` | H2, intro, 4 teasers with clip | `layout--cols-4` of `card`/`block-feature` with media | Container 4-col, Teaser ×4 | `band-lavender`, `topline-grid` |
 | **4B Journey** | Eyebrow, H3, intro, 5 unnumbered stops | `layout` 5-col of `block-feature` (question 5) | Container 5-col, Title + Text ×5 | `eyebrow`, `rule-gradient` connector |
@@ -95,6 +95,7 @@ Every bracketed placeholder from the brief is rendered as written. Buttons whose
 
 **Visible copy**
 - Campaign bar: `[Date, week of January 18]`
+- Hero subhead: `[coach / lead]`
 - Section 4: `[Lead / Coach]` (title and clip label)
 - Section 6: `[Available now / Confirm]` ×3, `[Description TBD]`
 - Section 7: `[Date, week of January 18]`, `[Premiere title]`, `[and guest TBD]`, `[January blog title]`
@@ -124,7 +125,24 @@ Every bracketed placeholder from the brief is rendered as written. Buttons whose
 
 ---
 
-## 5. Checklist (brief section 7)
+## 5. Copy changed from the brief (needs messaging sign-off)
+
+These replace brief v1.0 copy and should go to Taylor with the rest of the draft copy.
+
+| Where | Brief v1.0 | Now |
+|---|---|---|
+| Hero subhead | "Work is changing, not ending. The Frontier Mindset is how we learn, choose and create as AI keeps changing what work can be. The goal is simple: more capable people, not simply more capable AI." | "AI is changing work, and how people respond matters as much as the tools. The Frontier Mindset is how people adapt instead of freezing, discern instead of trusting blindly, create instead of waiting, and [coach / lead] instead of going it alone. It's built through practice, with leaders shaping the room to practice." |
+| Section 2 intro | "…Two beliefs often get in the way:" | "…Many people feel three fears at once:" |
+| Section 2 rows | Two belief rows: Fatalism; A fixed mindset about human capability | Three fear rows: **Using it too little** (the worry of falling behind as the tools, and the work, move on) · **Trusting it too much** (the worry of handing over judgment that should stay human) · **Being replaced by it** (the longer-term worry that there won't be a place for people in the work) |
+| Section 2 statement | "Both are understandable. Neither is helpful, or true." | "Each fear is understandable. None of them has to decide what happens next." |
+| Section 2, new closing paragraph | none | "This isn't a promise that AI will work out on its own. Resetting around human potential and ambition is real work. Over the next decade, the systems that prepare people for work, employ them and help them build something new will need to be redesigned. The Lab is one place to start: practical, tested at Microsoft first, and honest about what we're still learning." |
+| Section 3 body | "…It isn't a technical skill or a destination. It's a way of working… Anyone can build it, but no one builds it alone." | "…It isn't a technical skill or a destination, but a way of working… Anyone can build it, but no one builds it alone. Leaders and organizations create the culture, feedback and room to practice." |
+| Section 3, new statement line | none (the goal line was in the hero) | "The goal is simple: more capable people, not simply more capable AI." |
+| Section 5 cards | Chips "I lead people or an organization" / "I want to change how I work"; card eyebrows "For leaders" / "For you" | No chips; the chip wording is now each card's heading |
+
+The page's meta description is still the brief's.
+
+## 6. Checklist (brief section 7)
 
 | Check | Status |
 |---|---|
@@ -138,7 +156,7 @@ Every bracketed placeholder from the brief is rendered as written. Buttons whose
 | Bracketed placeholders visible and listed | Pass (section 4 above) |
 | `noindex, nofollow` | Pass |
 
-## 6. Deliberate choices to review
+## 7. Deliberate choices to review
 
 - **Header:** a Lab version of the standard Microsoft site header rather than a fully custom bar, so the page feels native to microsoft.com. The site name uses Microsoft's dark grey (#262626), not Lab indigo, and the Lab mark lives in the hero instead. The in-page section links (brief 3.3) are the header's menu items, so there's one bar instead of two. "Start here: Choose your path" is shortened to a "Choose your path" button in the Microsoft header style.
 - **Hero eyebrow** still reads "THE FRONTIER MINDSET LAB" (brief copy), even though the header now names the Lab too. Consider dropping one.
